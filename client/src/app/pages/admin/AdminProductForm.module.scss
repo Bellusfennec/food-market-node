@@ -1,0 +1,46 @@
+@import "../../../app/common/styles/vars";
+
+.container {
+  width: 600px;
+}
+
+.inputGroup {
+  display: flex;
+  justify-content: space-between;
+  .inputItem {
+    justify-self: stretch;
+  }
+  .inputItem:nth-child(even) {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+  }
+  .inputItem:last-child {
+    margin-right: 0;
+  }
+}
+.icon {
+  display: flex;
+  align-items: center;
+  font-size: 1.75rem;
+  background: none;
+  border: none;
+}
+.hint {
+  color: lightcoral;
+}
+.label {
+  text-align: center;
+}
+.back {
+  position: absolute;
+  top: 1.8rem;
+  left: 2rem;
+}
+.remove {
+  color: $colorErrorPrimary;
+  position: absolute;
+  top: 1.8rem;
+  right: 2rem;
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Филадельфия",
+    "price": "399",
+    "priceSale": "359",
+    "categoryId": "",
+    "image": "1.jpg"
+  },
+  {
+    "name": "Калифорния",
+    "price": "309",
+    "priceSale": "289",
+    "categoryId": "",
+    "image": "2.jpg"
+  },
+  {
+    "name": "Дракон",
+    "price": "419",
+    "priceSale": "",
+    "categoryId": "",
+    "image": "3.jpg"
+  },
+  {
+    "name": "Фараон",
+    "price": "379",
+    "priceSale": "",
+    "categoryId": "",
+    "image": "4.jpg"
+  }
+]

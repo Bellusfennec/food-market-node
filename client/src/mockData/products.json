@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Филадельфия",
+    "price": "399",
+    "priceSale": "359",
+    "category": "1c535a49-6f86-4d65-afb2-d7c79ff72d72",
+    "image": "1.jpg"
+  },
+  {
+    "name": "Калифорния",
+    "price": "309",
+    "priceSale": "289",
+    "category": "1c535a49-6f86-4d65-afb2-d7c79ff72d72",
+    "image": "2.jpg"
+  },
+  {
+    "name": "Дракон",
+    "price": "419",
+    "priceSale": "",
+    "category": "1c535a49-6f86-4d65-afb2-d7c79ff72d72",
+    "image": "3.jpg"
+  },
+  {
+    "name": "Фараон",
+    "price": "379",
+    "priceSale": "",
+    "category": "1c535a49-6f86-4d65-afb2-d7c79ff72d72",
+    "image": "4.jpg"
+  }
+]
