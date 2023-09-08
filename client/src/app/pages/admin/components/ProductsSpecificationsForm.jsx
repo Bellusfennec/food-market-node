@@ -4,12 +4,13 @@ import { Loading } from "../../../common/components/loading";
 import SpecificationCreate from "./SpecificationCreate";
 import SpecificationField from "./SpecificationField";
 
-const SpecificationForm = (props) => {
+const ProductsSpecificationsForm = (props) => {
   const { setForm, value } = props;
-  const valueIsString = typeof value[0] !== "object";
-  const notEmpty = value?.length > 0;
+  const valueIsString = typeof value[0] === "string";
+  if (valueIsString) return <Loading />;
+  // const notEmpty = value?.length > 0;
 
-  // console.log(value);
+  console.log(value);
 
   const handlerCreateField = () => {
     const newSpecification = {
@@ -19,25 +20,26 @@ const SpecificationForm = (props) => {
     };
     setForm((form) => ({
       ...form,
-      specifications: [...(form?.specifications || []), newSpecification],
+      productsSpecifications: [
+        ...(form?.productsSpecifications || []),
+        newSpecification,
+      ],
     }));
   };
 
   const handlerRemoveField = (id) => {
-    const specifications = value.filter((item) => item._id !== id);
-    setForm((form) => ({ ...form, specifications }));
+    const productsSpecifications = value.filter((item) => item._id !== id);
+    setForm((form) => ({ ...form, productsSpecifications }));
   };
 
   const handlerChangeData = (data) => {
     const isRepeat = value.filter((item) => item._id === data._id);
-    const specifications =
+    const productsSpecifications =
       isRepeat.length > 0
         ? value.map((item) => (item._id === data._id ? data : item))
         : [...value, data];
-    setForm((form) => ({ ...form, specifications }));
+    setForm((form) => ({ ...form, productsSpecifications }));
   };
-
-  if (valueIsString) return <Loading />;
 
   return (
     <>
@@ -63,4 +65,4 @@ const SpecificationForm = (props) => {
   );
 };
 
-export default React.memo(SpecificationForm);
+export default React.memo(ProductsSpecificationsForm);

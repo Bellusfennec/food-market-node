@@ -2,17 +2,12 @@ const { Schema, model } = require("mongoose");
 
 const schema = new Schema(
   {
-    specificationId: {
+    specification: {
       type: Schema.Types.ObjectId,
-      ref: "Category",
+      ref: "Specification",
       required: true,
     },
-    productId: {
-      type: Schema.Types.ObjectId,
-      ref: "Category",
-      required: true,
-    },
-    value: { type: number, required: true },
+    value: { type: String, required: true },
   },
   { timestamps: true }
 );

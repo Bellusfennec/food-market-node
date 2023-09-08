@@ -47,7 +47,9 @@ export function validate(valueForm, valueСonfig) {
     switch (key) {
       case "isRequared": {
         valueForm =
-          valueForm?.trim() === "" ? `Обязательное поле для заполнения` : false;
+          typeof valueForm === "string" && valueForm?.trim() === ""
+            ? `Обязательное поле для заполнения`
+            : false;
         break;
       }
       case "isYear": {

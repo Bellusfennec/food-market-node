@@ -7,8 +7,6 @@ const NavAdmin = () => {
       <Link to={`/admin/product`}>Все продукты</Link>
       <br />
       <Link to={`/admin/category`}>Все категории</Link>
-      <br />
-      <Link to={`/admin/mock-data`}>Mock data</Link>
     </nav>
   );
 };

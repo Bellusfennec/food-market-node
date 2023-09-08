@@ -79,26 +79,30 @@ const userCreateFailed = createAction("users/userCreateFailed");
 const userUpdateRequested = createAction("users/userUpdateRequested");
 const userUpdateFailed = createAction("users/userUpdateFailed");
 
-function createUser(payload) {
-  return async function (dispatch) {
-    dispatch(userCreateRequested());
-    try {
-      const { content } = await userService.create(payload);
-      dispatch(userCreated(content));
-    } catch (error) {
-      dispatch(userCreateFailed(error.message));
-    }
-  };
-}
+// function createUser(payload) {
+//   return async function (dispatch) {
+//     dispatch(userCreateRequested());
+//     try {
+//       const { content } = await userService.create(payload);
+//       dispatch(userCreated(content));
+//     } catch (error) {
+//       dispatch(userCreateFailed(error.message));
+//     }
+//   };
+// }
 
 export const registeredUser = (payload) => async (dispatch) => {
   dispatch(authRequested());
   try {
     const { email, password, ...rest } = payload;
-    const content = await authService.registration({ email, password });
+    const content = await authService.registration({
+      email,
+      password,
+      ...rest,
+    });
     localStorageService.setTokens(content);
-    dispatch(authRequestSuccess({ _id: content.localId }));
-    dispatch(createUser({ _id: content.localId, email, password, ...rest }));
+    dispatch(authRequestSuccess({ _id: content.userId }));
+    // dispatch(createUser({ _id: content.userId, email, password, ...rest }));
   } catch (error) {
     const { code, message } = error.response.data.error;
     if (code === 400) {
@@ -116,7 +120,7 @@ export const loggedInUser = (payload) => async (dispatch) => {
     const { email, password } = payload;
     const content = await authService.login({ email, password });
     localStorageService.setTokens(content);
-    dispatch(authRequestSuccess({ _id: content.localId }));
+    dispatch(authRequestSuccess({ _id: content.userId }));
   } catch (error) {
     const { code, message } = error.response.data.error;
     if (code === 400) {

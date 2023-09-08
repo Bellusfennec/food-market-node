@@ -8,9 +8,9 @@ import {
   validator,
 } from "../utils/form";
 
-const useForm = ({ onSubmit, FORM, CONFIG }) => {
-  FORM = FORM ? FORM : {};
-  CONFIG = CONFIG ? CONFIG : {};
+const useForm = ({ onSubmit, FORM = {}, CONFIG = {} }) => {
+  // FORM = FORM ? FORM : {};
+  // CONFIG = CONFIG ? CONFIG : {};
   const [form, setForm] = useState(FORM);
   const [name, setName] = useState(createName(FORM));
   const initPlaceholder = createPlaceholder(FORM, CONFIG);
@@ -21,11 +21,11 @@ const useForm = ({ onSubmit, FORM, CONFIG }) => {
   console.log("render form");
 
   // обработчик изменений
-  const handlerChange = useCallback((e) => {
+  const handlerChange = (e) => {
     const { value, name } = e.target;
 
     setForm({ ...form, [name]: value });
-  }, []);
+  };
 
   // обработчик кнопки Submit
   const handlerSubmit = (event) => {
@@ -38,7 +38,7 @@ const useForm = ({ onSubmit, FORM, CONFIG }) => {
   };
 
   // обработчик отпускания фокуса
-  const handlerBlur = useCallback((e) => {
+  const handlerBlur = (e) => {
     const { name } = e.target;
     const arrayСonfig = Object.entries(CONFIG);
     const newСonfig = arrayСonfig.map(([keyСonfig, valueСonfig]) => {
@@ -48,7 +48,7 @@ const useForm = ({ onSubmit, FORM, CONFIG }) => {
     });
     const newOutFocus = Object.fromEntries(newСonfig.filter(Boolean));
     setFocusСonfig({ ...focusСonfig, ...newOutFocus });
-  }, []);
+  };
 
   // обновление ошибок
   useEffect(() => {

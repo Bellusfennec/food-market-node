@@ -1,16 +1,17 @@
 import axios from "axios";
 import localStorageService from "./localStorage.service";
+import configFile from "../../config";
 
 export const httpAuth = axios.create({
-  baseURL: "https://identitytoolkit.googleapis.com/v1/",
-  params: {
-    key: process.env.REACT_APP_FIREBASE_KEY,
-  },
+  baseURL: configFile.apiEndPoint + "auth/",
+  // params: {
+  //   key: process.env.REACT_APP_FIREBASE_KEY,
+  // },
 });
 
 const authService = {
   registration: async ({ email, password }) => {
-    const { data } = await httpAuth.post(`accounts:signUp`, {
+    const { data } = await httpAuth.post(`signUp`, {
       email,
       password,
       returnSecureToken: true,
@@ -18,7 +19,7 @@ const authService = {
     return data;
   },
   login: async ({ email, password }) => {
-    const { data } = await httpAuth.post(`accounts:signInWithPassword`, {
+    const { data } = await httpAuth.post(`signInWithPassword`, {
       email,
       password,
       returnSecureToken: true,
@@ -32,26 +33,5 @@ const authService = {
     });
     return data;
   },
-  // get: async () => {
-  //   const { data } = await httpService.get(authEndPoint);
-  //   return data;
-  // },
-  // create: async (payload) => {
-  //   const { data } = await httpService.put(authEndPoint + payload._id, payload);
-  //   return data;
-  // },
-  // getCurrentauth: async () => {
-  //   const { data } = await httpService.get(
-  //     authEndPoint + localStorageService.getauthId()
-  //   );
-  //   return data;
-  // },
-  // update: async (payload) => {
-  //   const { data } = await httpService.patch(
-  //     authEndPoint + localStorageService.getauthId(),
-  //     payload
-  //   );
-  //   return data;
-  // }
 };
 export default authService;

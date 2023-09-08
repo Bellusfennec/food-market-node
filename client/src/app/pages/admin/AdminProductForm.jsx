@@ -25,10 +25,10 @@ import {
 } from "../../store/product";
 import style from "./AdminProductForm.module.scss";
 import CategoryCreate from "./components/CategoryCreate";
-import SpecificationForm from "./components/SpecificationForm";
+import ProductsSpecificationsForm from "./components/ProductsSpecificationsForm";
 import {
   getProductSpecificationsById,
-  loadedProductSpecifications,
+  getProductSpecifications,
 } from "../../store/productSpecification";
 
 const AdminProductForm = () => {
@@ -37,21 +37,18 @@ const AdminProductForm = () => {
   const categories = useSelector(getCategories());
   const isLoading = useSelector(getProductsLoadingStatus());
   const product = useSelector(getProductById(id));
-  const specifications = useSelector(getProductSpecificationsById(id));
-  const [specificationStatus, setSpecificationStatus] = useState(true);
   const render = useRef(null);
   const navigate = useNavigate();
   const CONFIG = {
     name: { isRequared: "" },
     category: { isRequared: "" },
-    description: { isRequared: "" },
     price: { isRequared: "" },
   };
   const initialForm = {
     name: "",
     category: "",
     description: "",
-    specifications: [],
+    productsSpecifications: [],
     price: "",
     priceSale: "",
     image: "1.jpg",
@@ -82,6 +79,7 @@ const AdminProductForm = () => {
       navigate(`/admin/product`);
     }
   }
+
   function handlerRemoveProduct(id) {
     dispatch(removedProduct(id));
     navigate(`/admin/product`);
@@ -89,20 +87,13 @@ const AdminProductForm = () => {
 
   useEffect(() => {
     if (product) {
-      // console.log("111111", product);
-      setForm(product);
-      dispatch(loadedProductSpecifications(product.specifications));
+      dispatch(getProductSpecifications(product.productsSpecifications))
+        .unwrap()
+        .then((result) => {
+          setForm(() => ({ ...product, productsSpecifications: result }));
+        });
     }
-  }, []);
-
-  useEffect(() => {
-    // console.log("333", specifications);
-    if (specificationStatus) {
-      // console.log("22222", specifications);
-      setForm({ ...product, specifications });
-      setSpecificationStatus(false);
-    }
-  }, [specifications]);
+  }, [id]);
 
   useEffect(() => {
     render.current++;
@@ -178,7 +169,10 @@ const AdminProductForm = () => {
         </FormItem>
       </FormGroup>
       <Divider />
-      <SpecificationForm value={form.specifications} setForm={setForm} />
+      <ProductsSpecificationsForm
+        value={form.productsSpecifications}
+        setForm={setForm}
+      />
       <Divider row="2" />
       <Button disabled={!isValid}>
         {isLoading ? <Loading /> : product ? "Обновить" : "Создать"}

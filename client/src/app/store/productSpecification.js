@@ -1,6 +1,21 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
 import productSpecificationService from "../services/productSpecification.service";
+
+export const getProductSpecifications = createAsyncThunk(
+  "productSpecification/getProductSpecifications",
+  async (productsSpecifications, { rejectWithValue }) => {
+    try {
+      const { content } = await productSpecificationService.getAllByProduct(
+        productsSpecifications
+      );
+      return content;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 const initialState = {
   entities: [],
@@ -48,6 +63,23 @@ const productSpecificationSlice = createSlice({
       state.error = action.payload;
     },
   },
+  extraReducers: {
+    [getProductSpecifications.pending]: (state) => {
+      state.isLoading = true;
+      state.error = null;
+    },
+    [getProductSpecifications.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      const entities = state.entities.filter(
+        (el) => el._id !== action.payload._id
+      );
+      state.entities = [...entities, action.payload];
+    },
+    [getProductSpecifications.rejected]: (state) => {
+      state.isLoading = false;
+      state.error = null;
+    },
+  },
 });
 
 const { actions, reducer: productSpecificationReducer } =
@@ -55,21 +87,21 @@ const { actions, reducer: productSpecificationReducer } =
 const { recived, created, removed, updated, requested, requestFailed } =
   actions;
 
-export const loadedProductSpecifications =
-  (specifications) => async (dispatch) => {
-    if (specifications?.length > 0) {
-      dispatch(requested());
-      try {
-        for (let i = 0; i < specifications.length; i++) {
-          const id = specifications[i];
-          const { content } = await productSpecificationService.get(id);
-          dispatch(recived(content));
-        }
-      } catch (error) {
-        dispatch(requestFailed(error.message));
-      }
-    }
-  };
+// export const loadedProductSpecifications =
+//   (specifications) => async (dispatch) => {
+//     if (specifications?.length > 0) {
+//       dispatch(requested());
+//       try {
+//         for (let i = 0; i < specifications.length; i++) {
+//           const id = specifications[i];
+//           const { content } = await productSpecificationService.get(id);
+//           dispatch(recived(content));
+//         }
+//       } catch (error) {
+//         dispatch(requestFailed(error.message));
+//       }
+//     }
+//   };
 export const createdProductSpecifications = (payload) => async (dispatch) => {
   if (payload?.specifications?.length > 0) {
     const { specifications } = payload;

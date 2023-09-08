@@ -5,15 +5,15 @@ const USER_ID = "user-id";
 
 export function setTokens({
   refreshToken,
-  idToken,
-  localId,
+  accessToken,
+  userId,
   expiresIn = 3600,
 }) {
   const expiresDate = new Date().getTime() + expiresIn * 1000;
-  localStorage.setItem(TOKEN_KEY, idToken);
+  localStorage.setItem(TOKEN_KEY, accessToken);
   localStorage.setItem(REFRESH_KEY, refreshToken);
   localStorage.setItem(EXPIRES_KEY, expiresDate);
-  localStorage.setItem(USER_ID, localId);
+  localStorage.setItem(USER_ID, userId);
 }
 
 export function getAccessToken() {

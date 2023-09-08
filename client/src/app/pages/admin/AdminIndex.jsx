@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import Divider from "../../common/components/divider/Divider";
 import MainLayout, { ContainerLayout } from "../../common/components/layouts";
 import { SectionWrapper } from "../../common/components/wrapper";
-import AdminMockData from "./AdminMockData";
 import AdminProduct from "./AdminProduct";
 import AdminProductForm from "./AdminProductForm";
 import NavAdmin from "./components/NavAdmin";
@@ -29,9 +28,6 @@ const AdminIndex = () => {
         </ContainerLayout>
       )}
       {page === "product" && <AdminProduct />}
-      <SectionWrapper>
-        {page === "mock-data" && <AdminMockData />}
-      </SectionWrapper>
     </MainLayout>
   );
 };

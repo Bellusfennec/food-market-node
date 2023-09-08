@@ -64,10 +64,6 @@ export const loadProducts = () => async (dispatch) => {
 export const createdProduct = (payload) => async (dispatch) => {
   dispatch(requested());
   try {
-    payload = { ...payload, _id: uuidv4() };
-    payload.specifications = await dispatch(
-      createdProductSpecifications(payload)
-    );
     const { content } = await productService.create(payload);
     dispatch(created(content));
   } catch (error) {
@@ -89,53 +85,53 @@ export const removedProduct = (id) => async (dispatch, getState) => {
 };
 
 export const updatedProduct = (payload) => async (dispatch, getState) => {
-  const { entities } = getState().product;
-  const product = entities.find((p) => p._id === payload._id);
+  // const { entities } = getState().product;
+  // const product = entities.find((p) => p._id === payload._id);
   dispatch(requested());
   try {
-    console.log("payload", payload);
-    console.log("product", product);
-    if (payload.specifications.length > 0) {
-      const newSpecifications = payload.specifications;
-      const oldSpecifications = product?.specifications || [];
-      const createdArray = [];
-      const updatedArray = [];
-      const deletedArray = [];
-      newSpecifications.forEach((newS) => {
-        const index = oldSpecifications.findIndex((oS) => oS._id === newS._id);
-        index !== -1 ? updatedArray.push(newS) : createdArray.push(newS);
-      });
-      oldSpecifications.forEach((oS) => {
-        const index = newSpecifications.findIndex(
-          (newS) => newS._id === oS._id
-        );
-        if (index === -1) deletedArray.push(oS);
-      });
-      console.log(createdArray, updatedArray, deletedArray);
-      if (updatedArray.length > 0) {
-        for (let i = 0; i < updatedArray.length; i++) {
-          const item = { ...updatedArray[i], _id: uuidv4() };
-          const { content } = await productSpecificationService.update(item);
-          console.log("upd content", content);
-          payload.specifications[i] = content._id;
-        }
-      }
-      if (createdArray.length > 0) {
-        for (let i = 0; i < createdArray.length; i++) {
-          const item = { ...createdArray[i], _id: uuidv4() };
-          const { content } = await productSpecificationService.create(item);
-          console.log("creat content", content);
-          payload.specifications[i] = content._id;
-        }
-      }
-      if (deletedArray.length > 0) {
-        // await dispatch(removedProductSpecifications({_id}));
-        for (let i = 0; i < deletedArray.length; i++) {
-          const item = deletedArray[i];
-          await productSpecificationService.delete(item._id);
-        }
-      }
-    }
+    // console.log("payload", payload);
+    // console.log("product", product);
+    // if (payload.specifications.length > 0) {
+    //   const newSpecifications = payload.specifications;
+    //   const oldSpecifications = product?.specifications || [];
+    //   const createdArray = [];
+    //   const updatedArray = [];
+    //   const deletedArray = [];
+    //   newSpecifications.forEach((newS) => {
+    //     const index = oldSpecifications.findIndex((oS) => oS._id === newS._id);
+    //     index !== -1 ? updatedArray.push(newS) : createdArray.push(newS);
+    //   });
+    //   oldSpecifications.forEach((oS) => {
+    //     const index = newSpecifications.findIndex(
+    //       (newS) => newS._id === oS._id
+    //     );
+    //     if (index === -1) deletedArray.push(oS);
+    //   });
+    //   console.log(createdArray, updatedArray, deletedArray);
+    //   if (updatedArray.length > 0) {
+    //     for (let i = 0; i < updatedArray.length; i++) {
+    //       const item = { ...updatedArray[i], _id: uuidv4() };
+    //       const { content } = await productSpecificationService.update(item);
+    //       console.log("upd content", content);
+    //       payload.specifications[i] = content._id;
+    //     }
+    //   }
+    //   if (createdArray.length > 0) {
+    //     for (let i = 0; i < createdArray.length; i++) {
+    //       const item = { ...createdArray[i], _id: uuidv4() };
+    //       const { content } = await productSpecificationService.create(item);
+    //       console.log("creat content", content);
+    //       payload.specifications[i] = content._id;
+    //     }
+    //   }
+    //   if (deletedArray.length > 0) {
+    //     // await dispatch(removedProductSpecifications({_id}));
+    //     for (let i = 0; i < deletedArray.length; i++) {
+    //       const item = deletedArray[i];
+    //       await productSpecificationService.delete(item._id);
+    //     }
+    //   }
+    // }
     const { content } = await productService.update(payload);
     dispatch(updated(content));
   } catch (error) {

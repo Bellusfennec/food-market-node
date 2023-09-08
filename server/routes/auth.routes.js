@@ -9,8 +9,8 @@ const Token = require("../models/Token");
 
 router.post("/signUp", [
   check("email", "Некорректный email").isEmail(),
-  check("password", "Минимальная длинна пароля 8 символов").isLength({
-    min: 8,
+  check("password", "Минимальная длинна пароля 6 символов").isLength({
+    min: 6,
   }),
   async (req, res) => {
     try {

@@ -7,6 +7,13 @@ const productSpecificationService = {
     const { data } = await httpService.get(productSpecificationEndPoint);
     return data;
   },
+  getAllByProduct: async (payload) => {
+    const { data } = await httpService.post(
+      productSpecificationEndPoint + "allByProduct",
+      payload
+    );
+    return data;
+  },
   get: async (id) => {
     const { data } = await httpService.get(productSpecificationEndPoint + id);
     return data;

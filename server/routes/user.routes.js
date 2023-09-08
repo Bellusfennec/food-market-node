@@ -3,6 +3,31 @@ const router = express.Router({ mergeParams: true });
 const User = require("../models/User");
 const auth = require("../middleware/auth.middleware");
 
+router.get("/", auth, async (req, res) => {
+  try {
+    const list = await User.find();
+
+    res.send(list);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "На сервере произошла ошибка. Попробуйте позже" });
+  }
+});
+
+router.get("/:userId", auth, async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const user = await User.findById(userId);
+
+    res.send(user);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "На сервере произошла ошибка. Попробуйте позже" });
+  }
+});
+
 router.patch("/:userId", auth, async (req, res) => {
   try {
     const { userId } = req.params;
@@ -15,17 +40,6 @@ router.patch("/:userId", auth, async (req, res) => {
     } else {
       res.status(401).json({ message: "Unauthorized" });
     }
-  } catch (error) {
-    res
-      .status(500)
-      .json({ message: "На сервере произошла ошибка. Попробуйте позже" });
-  }
-});
-router.get("/", auth, async (req, res) => {
-  try {
-    const list = await User.find();
-
-    res.send(list);
   } catch (error) {
     res
       .status(500)

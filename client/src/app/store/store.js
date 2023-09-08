@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import userReducer from "./user";
-// import { logger } from "./middleware/logger";
+import { logger } from "./middleware/logger";
 import productReducer from "./product";
 import specificationReducer from "./specification";
 import categoryReducer from "./category";
