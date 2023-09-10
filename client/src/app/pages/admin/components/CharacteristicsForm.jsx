@@ -4,53 +4,47 @@ import { Loading } from "../../../common/components/loading";
 import SpecificationCreate from "./SpecificationCreate";
 import SpecificationField from "./SpecificationField";
 
-const ProductsSpecificationsForm = (props) => {
+const CharacteristicsForm = (props) => {
   const { setForm, value } = props;
-  const valueIsString = typeof value[0] === "string";
-  if (valueIsString) return <Loading />;
-  // const notEmpty = value?.length > 0;
-
-  console.log(value);
+  if (typeof value[0] === "string") return <Loading />;
 
   const handlerCreateField = () => {
-    const newSpecification = {
+    const characteristic = {
       _id: value?.length || 0,
       value: "",
       specification: "",
     };
     setForm((form) => ({
       ...form,
-      productsSpecifications: [
-        ...(form?.productsSpecifications || []),
-        newSpecification,
-      ],
+      characteristics: [...(form?.characteristics || []), characteristic],
     }));
   };
 
   const handlerRemoveField = (id) => {
-    const productsSpecifications = value.filter((item) => item._id !== id);
-    setForm((form) => ({ ...form, productsSpecifications }));
+    const characteristics = value.filter((item) => item._id !== id);
+    setForm((form) => ({ ...form, characteristics }));
   };
 
   const handlerChangeData = (data) => {
     const isRepeat = value.filter((item) => item._id === data._id);
-    const productsSpecifications =
+    const characteristics =
       isRepeat.length > 0
         ? value.map((item) => (item._id === data._id ? data : item))
         : [...value, data];
-    setForm((form) => ({ ...form, productsSpecifications }));
+    setForm((form) => ({ ...form, characteristics }));
   };
 
   return (
     <>
-      {value?.map((item) => (
-        <SpecificationField
-          key={item._id}
-          item={item}
-          setData={handlerChangeData}
-          onRemove={handlerRemoveField}
-        />
-      ))}
+      {value?.length > 0 &&
+        value?.map((item) => (
+          <SpecificationField
+            key={item._id}
+            item={item}
+            setData={handlerChangeData}
+            onRemove={handlerRemoveField}
+          />
+        ))}
       <FormGroup>
         <FormItem grow={true}>
           <Button type="button" onClick={handlerCreateField} title="Добавить">
@@ -65,4 +59,4 @@ const ProductsSpecificationsForm = (props) => {
   );
 };
 
-export default React.memo(ProductsSpecificationsForm);
+export default React.memo(CharacteristicsForm);

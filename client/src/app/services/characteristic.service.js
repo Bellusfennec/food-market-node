@@ -1,43 +1,41 @@
 import httpService from "./http.service";
 
-const productSpecificationEndPoint = "product_specification/";
+const characteristicEndPoint = "characteristic/";
 
-const productSpecificationService = {
+const characteristicService = {
   getAll: async () => {
-    const { data } = await httpService.get(productSpecificationEndPoint);
+    const { data } = await httpService.get(characteristicEndPoint);
     return data;
   },
   getAllByProduct: async (payload) => {
     const { data } = await httpService.post(
-      productSpecificationEndPoint + "allByProduct",
+      characteristicEndPoint + "allByProduct",
       payload
     );
     return data;
   },
   get: async (id) => {
-    const { data } = await httpService.get(productSpecificationEndPoint + id);
+    const { data } = await httpService.get(characteristicEndPoint + id);
     return data;
   },
   create: async (payload) => {
     const { data } = await httpService.put(
-      productSpecificationEndPoint + payload._id,
+      characteristicEndPoint + payload._id,
       payload
     );
     return data;
   },
   update: async (payload) => {
     const { data } = await httpService.patch(
-      productSpecificationEndPoint + payload._id,
+      characteristicEndPoint + payload._id,
       payload
     );
     return data;
   },
   delete: async (id) => {
-    const { data } = await httpService.delete(
-      productSpecificationEndPoint + id
-    );
+    const { data } = await httpService.delete(characteristicEndPoint + id);
     return data;
   },
 };
 
-export default productSpecificationService;
+export default characteristicService;

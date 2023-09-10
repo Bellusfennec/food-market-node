@@ -5,16 +5,13 @@ import App from "./app/App";
 import "./app/common/styles/global.scss";
 import { Provider } from "react-redux";
 import store from "./app/store/store";
-import UserProvider from "./app/hooks/useUsers";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <React.StrictMode>
       <Provider store={store}>
-        <UserProvider>
-          <App />
-        </UserProvider>
+        <App />
       </Provider>
     </React.StrictMode>
   </BrowserRouter>

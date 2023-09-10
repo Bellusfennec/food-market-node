@@ -1,14 +1,15 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true });
-const ProductSpecification = require("../models/ProductSpecification");
+const Characteristic = require("../models/Characteristic");
 
 router.post("/allByProduct", async (req, res) => {
   try {
-    const specifications = req.body;
+    const characteristics = req.body;
     const list = [];
-    for (let i = 0; i < specifications.length; i++) {
-      const _id = specifications[i];
-      const item = await ProductSpecification.findById(_id);
+    for (let i = 0; i < characteristics.length; i++) {
+      const _id = characteristics[i];
+      const item = await Characteristic.findById(_id);
+      if (item === null) continue;
       list.push(item);
     }
 

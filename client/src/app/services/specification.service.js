@@ -12,10 +12,7 @@ const specificationService = {
     return data;
   },
   create: async (payload) => {
-    const { data } = await httpService.put(
-      specificationEndPoint + payload._id,
-      payload
-    );
+    const { data } = await httpService.post(specificationEndPoint, payload);
     return data;
   },
   update: async (payload) => {

@@ -12,4 +12,4 @@ const schema = new Schema(
   { timestamps: true }
 );
 
-module.exports = model("ProductSpecification", schema);
+module.exports = model("Characteristic", schema);

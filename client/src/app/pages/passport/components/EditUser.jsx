@@ -21,8 +21,8 @@ const EditUser = () => {
   const isLoading = useSelector(getUserLoadingStatus());
   const navigate = useNavigate();
   const CONFIG = {
-    email: { isRequared: "" },
-    password: { isRequared: "" },
+    email: { isRequired: "" },
+    password: { isRequired: "" },
   };
 
   const FORM = { ...user };

@@ -1,65 +1,70 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { setError } from "./errors";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import categoryService from "../services/category.service";
+
+export const loadCategories = createAsyncThunk(
+  "category/load",
+  async (_, { rejectWithValue }) => {
+    try {
+      const { content } = await categoryService.getAll();
+      return content;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const createCategory = createAsyncThunk(
+  "category/create",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { content } = await categoryService.create(payload);
+      return content;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 const initialState = {
   entities: [],
   isLoading: true,
+  error: null,
 };
 
 const categorySlice = createSlice({
   name: "category",
   initialState,
-  reducers: {
-    productRecived(state, action) {
-      state.entities = action.payload;
-    },
-    add(state, action) {
-      state.entities = [...state.entities, action.payload];
-    },
-    update(state, action) {
-      const elementIndex = state.entities.findIndex(
-        (el) => el.id === action.payload.id
-      );
-      state.entities[elementIndex] = {
-        ...state.entities[elementIndex],
-        ...action.payload,
-      };
-    },
-    remove(state, action) {
-      state.entities = state.entities.filter(
-        (el) => el.id !== action.payload.id
-      );
-    },
-    requested(state) {
+  reducers: {},
+  extraReducers: {
+    [loadCategories.pending]: (state) => {
       state.isLoading = true;
+      state.error = null;
     },
-    requestFailed(state) {
+    [loadCategories.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
+      state.entities = payload;
+    },
+    [loadCategories.rejected]: (state) => {
+      state.isLoading = false;
+      state.error = null;
+    },
+    [createCategory.pending]: (state) => {
+      state.isLoading = true;
+      state.error = null;
+    },
+    [createCategory.fulfilled]: (state, { payload }) => {
+      state.isLoading = false;
+      state.entities = [...state.entities, payload];
+    },
+    [createCategory.rejected]: (state) => {
+      state.isLoading = false;
+      state.error = null;
     },
   },
 });
 
 const { actions, reducer: categoryReducer } = categorySlice;
-const { productRecived, create, requestFailed, requested } = actions;
-
-export const loadCategories = () => async (dispatch) => {
-  dispatch(requested());
-  try {
-    const { content } = await categoryService.getAll();
-    dispatch(productRecived(content));
-  } catch (error) {
-    dispatch(requestFailed(error.message));
-    dispatch(setError(error.message));
-  }
-};
-
-export function createCategory(payload) {
-  return create(payload);
-}
-export function setCategories(payload) {
-  return productRecived(payload);
-}
+const {} = actions;
 
 export const getCategories = () => (state) => state.category.entities;
 export const getCategoriesLoadingStatus = () => (state) =>

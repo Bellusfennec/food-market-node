@@ -11,16 +11,21 @@ import Modal from "../../../common/components/modal/Modal";
 import { Loading } from "../../../common/components/loading";
 import useForm from "../../../hooks/useForm";
 import React, { useState } from "react";
-import useSpecification from "../../../hooks/useSpecification";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  createSpecification,
+  getSpecificationsLoadingStatus,
+} from "../../../store/specification";
 
 const SpecificationCreate = () => {
   const [modal, setModal] = useState(false);
-  const CONFIG = { name: { isRequared: "" } };
+  const dispatch = useDispatch();
+  const isLoading = useSelector(getSpecificationsLoadingStatus());
+  const CONFIG = { name: { isRequired: "" } };
   const FORM = { name: "" };
   const {
     handlerChange,
     form,
-    setError,
     handlerSubmit,
     isValid,
     name,
@@ -31,12 +36,11 @@ const SpecificationCreate = () => {
     FORM,
     CONFIG,
   });
-  const { isLoading, addSpecification } = useSpecification();
 
   function onSubmit(data) {
-    addSpecification(data)
-      .then(() => setModal(false))
-      .catch((error) => setError(error));
+    dispatch(createSpecification(data))
+      .unwrap()
+      .then(() => setModal(false));
   }
 
   return (
@@ -47,7 +51,7 @@ const SpecificationCreate = () => {
         </IconButton>
       </FormItem>
 
-      <Modal open={modal} setOpen={setModal} title="Новая характеристика">
+      <Modal open={modal} setOpen={setModal} title="Новая спецификация">
         <Divider />
         <TextInput
           name={name.name}

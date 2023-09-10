@@ -25,11 +25,11 @@ import {
 } from "../../store/product";
 import style from "./AdminProductForm.module.scss";
 import CategoryCreate from "./components/CategoryCreate";
-import ProductsSpecificationsForm from "./components/ProductsSpecificationsForm";
+import CharacteristicsForm from "./components/CharacteristicsForm";
 import {
-  getProductSpecificationsById,
-  getProductSpecifications,
-} from "../../store/productSpecification";
+  getCharacteristicsById,
+  getCharacteristics,
+} from "../../store/characteristic";
 
 const AdminProductForm = () => {
   const { id } = useParams();
@@ -37,18 +37,18 @@ const AdminProductForm = () => {
   const categories = useSelector(getCategories());
   const isLoading = useSelector(getProductsLoadingStatus());
   const product = useSelector(getProductById(id));
-  const render = useRef(null);
+  // const render = useRef(null);
   const navigate = useNavigate();
   const CONFIG = {
-    name: { isRequared: "" },
-    category: { isRequared: "" },
-    price: { isRequared: "" },
+    name: { isRequired: "" },
+    category: { isRequired: "" },
+    price: { isRequired: "" },
   };
   const initialForm = {
     name: "",
     category: "",
     description: "",
-    productsSpecifications: [],
+    characteristics: [],
     price: "",
     priceSale: "",
     image: "1.jpg",
@@ -87,18 +87,22 @@ const AdminProductForm = () => {
 
   useEffect(() => {
     if (product) {
-      dispatch(getProductSpecifications(product.productsSpecifications))
+      setForm(product);
+      dispatch(getCharacteristics(product.characteristics))
         .unwrap()
         .then((result) => {
-          setForm(() => ({ ...product, productsSpecifications: result }));
+          setForm((prevState) => ({
+            ...prevState,
+            characteristics: result,
+          }));
         });
     }
   }, [id]);
 
-  useEffect(() => {
-    render.current++;
-    console.log("render", render.current);
-  });
+  // useEffect(() => {
+  //   render.current++;
+  //   console.log("render", render.current);
+  // });
 
   if (isLoading) return <Loading />;
 
@@ -169,10 +173,7 @@ const AdminProductForm = () => {
         </FormItem>
       </FormGroup>
       <Divider />
-      <ProductsSpecificationsForm
-        value={form.productsSpecifications}
-        setForm={setForm}
-      />
+      <CharacteristicsForm value={form.characteristics} setForm={setForm} />
       <Divider row="2" />
       <Button disabled={!isValid}>
         {isLoading ? <Loading /> : product ? "Обновить" : "Создать"}

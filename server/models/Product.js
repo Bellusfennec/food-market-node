@@ -11,10 +11,10 @@ const schema = new Schema(
       ref: "Category",
       required: true,
     },
-    productsSpecifications: [
+    characteristics: [
       {
         type: Schema.Types.ObjectId,
-        ref: "ProductSpecification",
+        ref: "Characteristic",
         required: true,
       },
     ],

@@ -5,16 +5,21 @@ import { FiPlus } from "react-icons/fi";
 import Modal from "../../../common/components/modal/Modal";
 import Divider from "../../../common/components/divider/Divider";
 import { Loading } from "../../../common/components/loading";
-import useCategories from "../../../hooks/useCategories";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  createCategory,
+  getCategoriesLoadingStatus,
+} from "../../../store/category";
 
 const CategoryCreate = () => {
   const [modal, setModal] = useState(false);
-  const CONFIG = { name: { isRequared: "" } };
+  const dispatch = useDispatch();
+  const isLoading = useSelector(getCategoriesLoadingStatus());
+  const CONFIG = { name: { isRequired: "" } };
   const FORM = { name: "" };
   const {
     handlerChange,
     form,
-    setError,
     handlerSubmit,
     placeholder,
     name,
@@ -25,13 +30,11 @@ const CategoryCreate = () => {
     FORM,
     CONFIG,
   });
-  const { isLoading, addCategory } = useCategories();
-  // console.log(form, placeholder, name, error, isValid);
 
   function onSubmit(data) {
-    addCategory(data)
-      .then(() => setModal(false))
-      .catch((error) => setError(error));
+    dispatch(createCategory(data))
+      .unwrap()
+      .then(() => setModal(false));
   }
 
   return (

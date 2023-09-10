@@ -15,6 +15,11 @@ const ProductsTable = ({ products, onDeleteProduct, onSort, selectedSort }) => {
       ),
     },
     category: { path: "category", name: "Категория" },
+    characteristics: {
+      path: "characteristics",
+      name: "Кол-во (х)",
+      component: (product) => <p>{product.characteristics.length}</p>,
+    },
     edit: {
       component: (product) => (
         <button

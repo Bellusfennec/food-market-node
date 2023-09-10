@@ -21,8 +21,8 @@ const Registration = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const CONFIG = {
-    email: { isRequared: "" },
-    password: { isRequared: "" },
+    email: { isRequired: "" },
+    password: { isRequired: "" },
   };
   const email = searchParams?.get("email") ? searchParams?.get("email") : "";
   const FORM = { email, password: "" };

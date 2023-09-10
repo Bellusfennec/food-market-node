@@ -45,7 +45,7 @@ export function validate(valueForm, valueСonfig) {
     if (error) continue;
     /* Если ошибок нет - проверить */
     switch (key) {
-      case "isRequared": {
+      case "isRequired": {
         valueForm =
           typeof valueForm === "string" && valueForm?.trim() === ""
             ? `Обязательное поле для заполнения`
