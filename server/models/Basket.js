@@ -7,7 +7,8 @@ const schema = new Schema(
       ref: "Product",
       required: true,
     },
-    count: { type: number, required: true },
+    productCount: { type: number, required: true },
+    productPrice: { type: number, required: true },
   },
   { timestamps: true }
 );

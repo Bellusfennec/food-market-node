@@ -84,6 +84,10 @@ const { actions, reducer: characteristicReducer } = characteristicSlice;
 const { recived, created, removed, updated, requested, requestFailed } =
   actions;
 
+export const getCharacteristicById = (id) => (state) => {
+  const { entities } = state.characteristic;
+  return entities ? entities.find((c) => c._id === id) : entities;
+};
 export const getCharacteristicsLoadingStatus = () => (state) =>
   state.characteristic.isLoading;
 

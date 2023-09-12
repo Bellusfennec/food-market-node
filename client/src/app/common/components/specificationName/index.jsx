@@ -2,8 +2,8 @@ import { useSelector } from "react-redux";
 import { getSpecificationById } from "../../../store/specification";
 
 const SpecificationName = ({ id }) => {
-  const { name } = useSelector(getSpecificationById(id));
-  return name;
+  const specification = useSelector(getSpecificationById(id));
+  return specification?.name ? specification?.name : "Ошибка";
 };
 
 export default SpecificationName;

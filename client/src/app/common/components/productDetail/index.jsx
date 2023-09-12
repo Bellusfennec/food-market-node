@@ -4,7 +4,8 @@ import Button from "../form/Button";
 import SpecificationName from "../specificationName/index";
 
 const ProductDetail = (props) => {
-  const { name, image, category, price, priceSale, characteristics } = props;
+  const { name, image, category, price, priceSale, characteristicsList } =
+    props;
   const { _id, addToBasket } = props;
   return (
     <>
@@ -25,11 +26,11 @@ const ProductDetail = (props) => {
             Категория: <CategoryName id={category} />
           </p>
 
-          {characteristics.length > 0 && (
+          {characteristicsList.length > 0 && (
             <>
               <br />
               <h5>Характеристики</h5>
-              {characteristics.map((c) => (
+              {characteristicsList.map((c) => (
                 <div key={c._id} className={style.characteristic}>
                   <div>
                     <span>
