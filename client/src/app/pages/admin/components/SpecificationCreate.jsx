@@ -8,7 +8,7 @@ import {
   TextInput,
 } from "../../../common/components/form";
 import Modal from "../../../common/components/modal/Modal";
-import { Loading } from "../../../common/components/loading";
+import Loading from "../../../common/components/loading";
 import useForm from "../../../hooks/useForm";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";

@@ -5,8 +5,8 @@ export function labelForm(value) {
   if (value === "birthDate") return "Год рождения";
   if (value === "category") return "Категория";
   if (value === "name") return "Название";
-  if (value === "specification") return "Характеристикa";
-  if (value === "specifications") return "Характеристики";
+  if (value === "specification") return "Спецификация";
+  if (value === "specifications") return "Спецификации";
   if (value === "title") return "Загаловок";
   if (value === "description") return "Описание";
   if (value === "email") return "Электронная почта";

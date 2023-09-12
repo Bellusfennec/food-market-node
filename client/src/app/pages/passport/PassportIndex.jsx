@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Navigate, useParams } from "react-router-dom";
 import Logo from "../../common/components/header/Logo";
 import { ModalLayout } from "../../common/components/layouts";
-import { Loading } from "../../common/components/loading";
+import Loading from "../../common/components/loading";
 import { getCurrentUser, getLoggedStatus } from "../../store/user";
 import style from "./PassportIndex.module.scss";
 import EditUser from "./components/EditUser";

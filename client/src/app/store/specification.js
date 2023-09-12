@@ -67,6 +67,10 @@ const { actions, reducer: specificationReducer } = specificationSlice;
 const {} = actions;
 
 export const getSpecifications = () => (state) => state.specification.entities;
+export const getSpecificationById = (id) => (state) => {
+  const { entities } = state.specification;
+  return entities ? entities.find((c) => c._id === id) : entities;
+};
 export const getSpecificationsLoadingStatus = () => (state) =>
   state.specification.isLoading;
 

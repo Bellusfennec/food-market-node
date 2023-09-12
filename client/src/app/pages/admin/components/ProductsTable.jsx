@@ -3,6 +3,7 @@ import Table from "../../../common/components/table";
 import TableHeader from "../../../common/components/table/TableHeader";
 import TableBody from "../../../common/components/table/TableBody";
 import { Link, useNavigate } from "react-router-dom";
+import CategoryName from "../../../common/components/categoryName";
 
 const ProductsTable = ({ products, onDeleteProduct, onSort, selectedSort }) => {
   const navigate = useNavigate();
@@ -14,7 +15,11 @@ const ProductsTable = ({ products, onDeleteProduct, onSort, selectedSort }) => {
         <Link to={`/product/detail/${product._id}`}>{product.name}</Link>
       ),
     },
-    category: { path: "category", name: "Категория" },
+    category: {
+      path: "category",
+      name: "Категория",
+      component: (product) => <CategoryName id={product.category} />,
+    },
     characteristics: {
       path: "characteristics",
       name: "Кол-во (х)",

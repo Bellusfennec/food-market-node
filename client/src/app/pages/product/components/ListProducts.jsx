@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import List from "../../../common/components/card/List";
-import ProductCard from "../../../common/components/card/ProductCard";
-import { Loading } from "../../../common/components/loading";
+import ProductCard from "../../../common/components/productCard";
+import Loading from "../../../common/components/loading";
 import ContainerWrapper, {
   SectionWrapper,
 } from "../../../common/components/wrapper";

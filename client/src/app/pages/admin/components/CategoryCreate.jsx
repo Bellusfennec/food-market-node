@@ -4,7 +4,7 @@ import { Button, IconButton, TextInput } from "../../../common/components/form";
 import { FiPlus } from "react-icons/fi";
 import Modal from "../../../common/components/modal/Modal";
 import Divider from "../../../common/components/divider/Divider";
-import { Loading } from "../../../common/components/loading";
+import Loading from "../../../common/components/loading";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createCategory,

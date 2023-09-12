@@ -3,7 +3,7 @@ import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import SearchInput from "../../common/components/form/SearchInput";
-import { Loading } from "../../common/components/loading";
+import Loading from "../../common/components/loading";
 import { SectionWrapper } from "../../common/components/wrapper";
 import ProductsTable from "./components/ProductsTable";
 import { FormGroup, FormItem } from "../../common/components/form";

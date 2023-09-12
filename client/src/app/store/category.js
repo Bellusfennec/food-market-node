@@ -67,6 +67,10 @@ const { actions, reducer: categoryReducer } = categorySlice;
 const {} = actions;
 
 export const getCategories = () => (state) => state.category.entities;
+export const getCategoryById = (id) => (state) => {
+  const { entities } = state.category;
+  return entities ? entities.find((c) => c._id === id) : entities;
+};
 export const getCategoriesLoadingStatus = () => (state) =>
   state.category.isLoading;
 

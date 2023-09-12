@@ -13,7 +13,7 @@ import {
   TextInput,
   TextareaField,
 } from "../../../app/common/components/form";
-import { Loading } from "../../../app/common/components/loading";
+import Loading from "../../../app/common/components/loading";
 import useForm from "../../hooks/useForm";
 import { getCategories } from "../../store/category";
 import {
@@ -26,10 +26,7 @@ import {
 import style from "./AdminProductForm.module.scss";
 import CategoryCreate from "./components/CategoryCreate";
 import CharacteristicsForm from "./components/CharacteristicsForm";
-import {
-  getCharacteristicsById,
-  getCharacteristics,
-} from "../../store/characteristic";
+import { getCharacteristics } from "../../store/characteristic";
 
 const AdminProductForm = () => {
   const { id } = useParams();

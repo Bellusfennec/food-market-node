@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Divider from "../../../common/components/divider/Divider";
 import { Button, TextInput } from "../../../common/components/form";
-import { Loading } from "../../../common/components/loading";
+import Loading from "../../../common/components/loading";
 import useForm from "../../../hooks/useForm";
 import {
   getAuthLoadingStatus,

@@ -1,11 +1,12 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import userReducer from "./user";
-import { logger } from "./middleware/logger";
+// import { logger } from "./middleware/logger";
 import productReducer from "./product";
 import specificationReducer from "./specification";
 import categoryReducer from "./category";
 import errorReducer from "./errors";
 import characteristicReducer from "./characteristic";
+import basketReducer from "./basket";
 
 const rootReducer = combineReducers({
   error: errorReducer,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   category: categoryReducer,
   specification: specificationReducer,
   characteristic: characteristicReducer,
+  basket: basketReducer,
 });
 
 const store = configureStore({

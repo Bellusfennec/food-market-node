@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import MainLayout, { ContainerLayout } from "../../common/components/layouts";
-import DetailProduct from "./components/DetailProduct";
+import ProductDetailPage from "./ProductDetailPage";
 import ListProducts from "./components/ListProducts";
 import { SectionWrapper } from "../../common/components/wrapper";
 
@@ -13,9 +13,7 @@ const ProductIndex = () => {
       {!page && <ListProducts />}
       {page === "detail" && productId && (
         <SectionWrapper>
-          <ContainerLayout>
-            <DetailProduct />
-          </ContainerLayout>
+          <ProductDetailPage />
         </SectionWrapper>
       )}
     </MainLayout>

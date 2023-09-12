@@ -8,7 +8,7 @@ import {
   getUserLoadingStatus,
   loadedUser,
 } from "../../store/user";
-import { Loading } from "../components/loading";
+import Loading from "../components/loading";
 import { loadSpecifications } from "../../store/specification";
 import { loadCategories } from "../../store/category";
 import { loadProducts } from "../../store/product";

@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, FormGroup, FormItem } from "../../../common/components/form";
-import { Loading } from "../../../common/components/loading";
+import Loading from "../../../common/components/loading";
 import SpecificationCreate from "./SpecificationCreate";
 import SpecificationField from "./SpecificationField";
 
