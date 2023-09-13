@@ -7,6 +7,7 @@ import categoryReducer from "./category";
 import errorReducer from "./errors";
 import characteristicReducer from "./characteristic";
 import basketReducer from "./basket";
+import favoriteReducer from "./favorite";
 
 const rootReducer = combineReducers({
   error: errorReducer,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   specification: specificationReducer,
   characteristic: characteristicReducer,
   basket: basketReducer,
+  favorite: favoriteReducer,
 });
 
 const store = configureStore({

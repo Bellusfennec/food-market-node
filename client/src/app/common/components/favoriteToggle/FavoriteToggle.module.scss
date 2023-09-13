@@ -1,0 +1,14 @@
+@import "../../../common/styles/vars";
+
+.red {
+  color: $colorErrorPrimary;
+  &:hover {
+    color: $colorErrorPrimary;
+  }
+}
+.white {
+  color: $colorNeutral200;
+  &:hover {
+    color: $colorNeutral200;
+  }
+}

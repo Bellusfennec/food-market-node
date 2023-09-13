@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import basketService from "../services/basket.service";
 
-export const addToBasket = (productId) => async (dispatch, getState) => {
+export const addToBasket = (productId) => (dispatch, getState) => {
   dispatch(pending());
   try {
     const { entities } = getState().basket;
@@ -14,7 +14,7 @@ export const addToBasket = (productId) => async (dispatch, getState) => {
   }
 };
 
-export const increaseInBasket = (productId) => async (dispatch, getState) => {
+export const increaseInBasket = (productId) => (dispatch, getState) => {
   dispatch(pending());
   try {
     const { entities } = getState().basket;
@@ -31,7 +31,7 @@ export const increaseInBasket = (productId) => async (dispatch, getState) => {
   }
 };
 
-export const decreaseInBasket = (productId) => async (dispatch, getState) => {
+export const decreaseInBasket = (productId) => (dispatch, getState) => {
   dispatch(pending());
   try {
     const { entities } = getState().basket;
@@ -51,7 +51,7 @@ export const decreaseInBasket = (productId) => async (dispatch, getState) => {
   }
 };
 
-export const deleteFormBasket = (productId) => async (dispatch, getState) => {
+export const deleteFormBasket = (productId) => (dispatch, getState) => {
   dispatch(pending());
   try {
     const { entities } = getState().basket;

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Button from "../form/Button";
 import { IoChevronBackOutline } from "react-icons/io5";
 import { FiImage } from "react-icons/fi";
+import Image from "../image";
 
 const Card = (props) => {
   const { image, title, link, description } = props;
@@ -12,7 +13,7 @@ const Card = (props) => {
     <div className={style.item}>
       <div className={style.body}>
         <div className={style.image}>
-          <img src={process.env.PUBLIC_URL + image} alt={title} />
+          <Image alt={title} image={image} />
           <div className={style.filter} />
           <FiImage className={style.icon}>
             <div className={style.wave}></div>

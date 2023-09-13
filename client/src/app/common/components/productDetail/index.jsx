@@ -2,6 +2,7 @@ import style from "./ProductDetail.module.scss";
 import CategoryName from "../../../common/components/categoryName/index";
 import Button from "../form/Button";
 import SpecificationName from "../specificationName/index";
+import Image from "../image";
 
 const ProductDetail = (props) => {
   const { name, image, category, price, priceSale, characteristicsList } =
@@ -18,9 +19,7 @@ const ProductDetail = (props) => {
       </div>
       <div className={style.container}>
         <div className={style.left}>
-          <div className={style.image}>
-            <img src={process.env.REACT_APP_IMAGE_URL + image} alt={name} />
-          </div>
+          <Image alt={name} image={image} />
         </div>
         <div className={style.center}>
           <p>
