@@ -1,0 +1,19 @@
+@import "../../../app/common/styles/vars";
+
+.container {
+  margin: 0 auto;
+  width: 680px;
+  border: 1px solid $colorNeutral150;
+  border-radius: $borderRadius100;
+  padding: 2rem;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.productList {
+  margin: 3rem 0;
+  border-top: 1px solid $colorNeutral150;
+  border-bottom: 1px solid $colorNeutral150;
+}

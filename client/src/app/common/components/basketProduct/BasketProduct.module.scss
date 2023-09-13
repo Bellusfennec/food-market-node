@@ -1,0 +1,29 @@
+@import "../../../common/styles/vars";
+
+.container {
+  padding: 1rem 0;
+  border-top: 1px solid $colorNeutral150;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &:first-child {
+    border: none;
+  }
+}
+.product {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  .image {
+    width: 3rem;
+  }
+}
+
+.basketButtons {
+  display: flex;
+  align-items: center;
+  div {
+    align-self: center;
+    padding: 0 1rem;
+  }
+}

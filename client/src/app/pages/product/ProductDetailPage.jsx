@@ -9,7 +9,12 @@ import {
   getCharacteristics,
   getCharacteristicsLoadingStatus,
 } from "../../store/characteristic";
-import { addToBasket } from "../../store/basket";
+import {
+  addToBasket,
+  decreaseInBasket,
+  getBasketById,
+  increaseInBasket,
+} from "../../store/basket";
 
 const ProductDetailPage = () => {
   const dispatch = useDispatch();
@@ -20,6 +25,7 @@ const ProductDetailPage = () => {
     getCharacteristicsLoadingStatus()
   );
   const [characteristics, setCharacteristics] = useState([]);
+  const inBasket = useSelector(getBasketById(productId));
 
   useEffect(() => {
     if (product) {
@@ -31,9 +37,9 @@ const ProductDetailPage = () => {
     }
   }, [productId]);
 
-  const handlerAddToBasket = (id) => {
-    dispatch(addToBasket(id));
-  };
+  const handlerAddToBasket = (id) => dispatch(addToBasket(id));
+  const handlerIncreaseInBasket = (id) => dispatch(increaseInBasket(id));
+  const handlerDecreaseInBasket = (id) => dispatch(decreaseInBasket(id));
 
   if (isLoadingProducts || isLoadingCharacteristics) return <Loading />;
 
@@ -42,6 +48,9 @@ const ProductDetailPage = () => {
       {...product}
       characteristicsList={characteristics}
       addToBasket={handlerAddToBasket}
+      increaseInBasket={handlerIncreaseInBasket}
+      decreaseInBasket={handlerDecreaseInBasket}
+      inBasket={inBasket}
     />
   );
 };

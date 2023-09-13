@@ -5,6 +5,7 @@ import HomeIndex from "./pages/home/index.js";
 import PassportIndex from "./pages/passport/index.js";
 import ProductIndex from "./pages/product/index.js";
 import PassportLoggedOut from "./pages/passport/PassportLoggedOut.jsx";
+import BasketIndex from "./pages/basket/basketIndex.jsx";
 
 const AppRoutes = () => {
   return (
@@ -13,6 +14,7 @@ const AppRoutes = () => {
       <Route path="passport/:page?" element={<PassportIndex />} />
       <Route path="logout" element={<PassportLoggedOut />} />
       <Route path="product/:page?/:productId?" element={<ProductIndex />} />
+      <Route path="basket/:page?" element={<BasketIndex />} />
       <Route path="admin/:page?/:action?/:id?" element={<AdminIndex />} />
       <Route path="*" element={<NotFoundIndex />} />
     </Routes>

@@ -6,7 +6,8 @@ import SpecificationName from "../specificationName/index";
 const ProductDetail = (props) => {
   const { name, image, category, price, priceSale, characteristicsList } =
     props;
-  const { _id, addToBasket } = props;
+  const { _id, addToBasket, inBasket, increaseInBasket, decreaseInBasket } =
+    props;
   return (
     <>
       <div>
@@ -46,9 +47,28 @@ const ProductDetail = (props) => {
         <div className={style.right}>
           <p className={style.price}>{price} ₽</p>
           {priceSale && <p>{priceSale}</p>}
-          <Button onClick={() => addToBasket(_id)} className={style.basket}>
-            Добавить в корзину
-          </Button>
+          {!inBasket && (
+            <Button onClick={() => addToBasket(_id)} className={style.basket}>
+              Добавить в корзину
+            </Button>
+          )}
+          {inBasket && (
+            <div className={style.basketButtons}>
+              <Button
+                onClick={() => decreaseInBasket(_id)}
+                className={style.basket}
+              >
+                -
+              </Button>
+              <div>{inBasket.productCount}</div>
+              <Button
+                onClick={() => increaseInBasket(_id)}
+                className={style.basket}
+              >
+                +
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </>

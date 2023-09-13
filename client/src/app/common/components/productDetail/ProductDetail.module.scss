@@ -38,8 +38,7 @@
 .price {
   font-size: 3rem;
 }
-.basket {
-}
+
 .characteristic {
   display: flex;
   margin-top: 0.5rem;
@@ -71,5 +70,14 @@
     &:last-child {
       padding-left: 5px;
     }
+  }
+}
+.basket {
+}
+.basketButtons {
+  display: flex;
+  div {
+    align-self: center;
+    padding: 0 1rem;
   }
 }

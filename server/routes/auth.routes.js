@@ -80,7 +80,7 @@ router.post("/signInWithPassword", [
           },
         });
       }
-      console.log(existingUser.password, password);
+
       const isPasswordEqual = await bcryptjs.compare(
         password,
         existingUser.password
