@@ -34,3 +34,15 @@
     }
   }
 }
+.basket {
+  position: relative;
+  .basketCount {
+    margin-left: 0.25rem;
+    font-size: 1rem;
+    padding: 0.25rem 0.5rem;
+    align-self: center;
+    border-radius: $borderRadius200;
+    background: $colorPrimary;
+    color: $colorSecondary;
+  }
+}

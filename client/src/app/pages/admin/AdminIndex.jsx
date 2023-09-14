@@ -2,32 +2,37 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import Divider from "../../common/components/divider/Divider";
-import MainLayout, { ContainerLayout } from "../../common/components/layouts";
+import MainLayout from "../../layouts/main";
 import { SectionWrapper } from "../../common/components/wrapper";
 import AdminProduct from "./AdminProduct";
 import AdminProductForm from "./AdminProductForm";
 import NavAdmin from "./components/NavAdmin";
+import Container from "../../common/components/container";
 
 const AdminIndex = () => {
   const { page, action, id } = useParams();
 
   return (
     <MainLayout>
-      <SectionWrapper y="0">
+      <Container>
         <NavAdmin />
-      </SectionWrapper>
-      <Divider />
+      </Container>
+      <br />
       {page === "product" && action === "edit" && id && (
-        <ContainerLayout>
+        <Container>
           <AdminProductForm />
-        </ContainerLayout>
+        </Container>
       )}
       {page === "product" && action === "create" && (
-        <ContainerLayout>
+        <Container>
           <AdminProductForm />
-        </ContainerLayout>
+        </Container>
       )}
-      {page === "product" && <AdminProduct />}
+      {page === "product" && !action && (
+        <Container>
+          <AdminProduct />
+        </Container>
+      )}
     </MainLayout>
   );
 };

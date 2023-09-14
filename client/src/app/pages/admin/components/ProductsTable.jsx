@@ -22,7 +22,7 @@ const ProductsTable = ({ products, onDeleteProduct, onSort, selectedSort }) => {
     },
     characteristics: {
       path: "characteristics",
-      name: "Кол-во (х)",
+      name: "Кол-во характеристик",
       component: (product) => <p>{product.characteristics.length}</p>,
     },
     edit: {

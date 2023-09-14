@@ -1,11 +1,14 @@
 @import "../../../common/styles/vars";
 
 .container {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid $colorNeutral150;
+}
+.nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
   @media screen and (max-width: 700px) {
     flex-direction: column;
   }

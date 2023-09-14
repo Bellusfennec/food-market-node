@@ -119,7 +119,8 @@ const AdminProductForm = () => {
         </IconButton>
       </div>
       <h3 className={style.label}>Новый товар</h3>
-      <Divider row="2" />
+      <br />
+      <br />
       <FormGroup>
         <FormItem grow="1">
           <TextInput
@@ -131,18 +132,8 @@ const AdminProductForm = () => {
             onBlur={handlerBlur}
           />
         </FormItem>
-        <FormItem>
-          <TextInput
-            name={name.price}
-            value={form.price}
-            error={error.price}
-            placeholder={placeholder.price}
-            onChange={handlerChange}
-            onBlur={handlerBlur}
-          />
-        </FormItem>
       </FormGroup>
-      <Divider />
+      <br />
       <TextareaField
         name={name.description}
         value={form.description}
@@ -151,7 +142,7 @@ const AdminProductForm = () => {
         onChange={handlerChange}
         onBlur={handlerBlur}
       />
-      <Divider />
+      <br />
       <FormGroup>
         <FormItem grow="1">
           <Dropdown
@@ -169,9 +160,34 @@ const AdminProductForm = () => {
           <CategoryCreate />
         </FormItem>
       </FormGroup>
-      <Divider />
+      <br />
+      <FormGroup>
+        <FormItem grow="1">
+          <TextInput
+            name={name.price}
+            value={form.price}
+            error={error.price}
+            placeholder={placeholder.price}
+            onChange={handlerChange}
+            onBlur={handlerBlur}
+          />
+        </FormItem>
+        <FormItem grow="1">
+          <TextInput
+            name={name.priceSale}
+            value={form.priceSale}
+            error={error.priceSale}
+            placeholder={placeholder.priceSale}
+            onChange={handlerChange}
+            onBlur={handlerBlur}
+          />
+        </FormItem>
+      </FormGroup>
+
+      <br />
       <CharacteristicsForm value={form.characteristics} setForm={setForm} />
-      <Divider row="2" />
+      <br />
+      <br />
       <Button disabled={!isValid}>
         {isLoading ? <Loading /> : product ? "Обновить" : "Создать"}
       </Button>

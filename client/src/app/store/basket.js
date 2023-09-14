@@ -51,14 +51,11 @@ export const decreaseInBasket = (productId) => (dispatch, getState) => {
   }
 };
 
-export const deleteFormBasket = (productId) => (dispatch, getState) => {
+export const deleteFormBasket = () => (dispatch) => {
   dispatch(pending());
   try {
-    const { entities } = getState().basket;
-    let itemsList = [...entities];
-    itemsList = itemsList.filter((f) => f.productId !== productId);
-    basketService.set(itemsList);
-    dispatch(fulfilled(itemsList));
+    basketService.set([]);
+    dispatch(fulfilled([]));
   } catch (error) {
     dispatch(rejected(error));
   }
@@ -98,6 +95,16 @@ export const getBasket = () => (state) => state.basket.entities;
 export const getBasketById = (id) => (state) => {
   const { entities } = state.basket;
   return entities ? entities.find((c) => c.productId === id) : entities;
+};
+export const getBasketSum = () => (state) => {
+  const basket = state.basket.entities;
+  const product = state.product.entities;
+  let sum = 0;
+  basket.forEach((m) => {
+    const { price, priceSale } = product.find((f) => f._id === m.productId);
+    sum += priceSale ? priceSale : price;
+  });
+  return sum;
 };
 export const getBasketLoadingStatus = () => (state) => state.basket.isLoading;
 

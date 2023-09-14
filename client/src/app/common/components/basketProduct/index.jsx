@@ -35,7 +35,17 @@ const BasketProduct = (props) => {
           +
         </IconButton>
       </div>
-      <div>{priceSale ? priceSale : price} ₽</div>
+      <div className={style.price}>
+        {!priceSale && <div className={style.regular}>{price} ₽</div>}
+        {priceSale && (
+          <>
+            <div className={style.discount}>
+              <span>{price} ₽</span>
+            </div>
+            <div className={style.regular}>{priceSale} ₽</div>
+          </>
+        )}
+      </div>
     </div>
   );
 };

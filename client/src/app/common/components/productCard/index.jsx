@@ -16,18 +16,17 @@ const ProductCard = (props) => {
   const { image, name, link, _id, price, priceSale } = props;
   const dispatch = useDispatch();
   const inBasket = useSelector(getBasketById(_id));
+  const percentDiscount = ((100 * (priceSale - price)) / price).toFixed(0);
 
   return (
     <div className={style.item}>
-      <Image alt={name} image={image} />
+      <Image alt={name} image={image} link={link} />
       <div className={style.main}>
         <Link to={link} className={style.label}>
           <h3>{name}</h3>
         </Link>
         {priceSale && (
-          <div className={style.sale}>
-            Скидка {(100 * (priceSale - price)) / price}%
-          </div>
+          <div className={style.sale}>Скидка {percentDiscount}%</div>
         )}
         <FavoriteToggle id={_id} className={style.favorite} />
         <div className={style.footer}>
@@ -36,9 +35,9 @@ const ProductCard = (props) => {
             {priceSale && (
               <>
                 <div className={style.discount}>
-                  <span>{priceSale} ₽</span>
+                  <span>{price} ₽</span>
                 </div>
-                <div className={style.regular}>{price} ₽</div>
+                <div className={style.regular}>{priceSale} ₽</div>
               </>
             )}
           </div>

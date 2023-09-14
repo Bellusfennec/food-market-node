@@ -2,6 +2,8 @@
 
 .container {
   width: 600px;
+  margin: 0 auto;
+  position: relative;
 }
 
 .inputGroup {
@@ -35,12 +37,12 @@
 }
 .back {
   position: absolute;
-  top: 1.8rem;
+  // top: 1.8rem;
   left: 2rem;
 }
 .remove {
   color: $colorErrorPrimary;
   position: absolute;
-  top: 1.8rem;
+  // top: 1.8rem;
   right: 2rem;
 }

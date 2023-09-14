@@ -22,9 +22,45 @@
   border-radius: $borderRadius200;
 }
 .price {
-  font-size: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 1rem;
+  .regular {
+    font-weight: bold;
+    font-size: 2.5em;
+    display: flex;
+    align-items: center;
+    color: $colorNeutral800;
+  }
+  .discount {
+    font-style: italic;
+    display: flex;
+    align-items: center;
+    color: $colorNeutral600;
+    font-size: 1.5em;
+    span {
+      display: flex;
+      align-items: center;
+      position: relative;
+      &::before {
+        content: "";
+        width: 100%;
+        height: 2px;
+        background: $colorNeutral600;
+        position: absolute;
+      }
+    }
+  }
 }
-
+.sale {
+  margin-left: 1rem;
+  background: $colorErrorSecondary;
+  color: $colorErrorPrimary;
+  padding: 0.5rem;
+  font-size: 0.8rem;
+  border-radius: 1rem;
+}
 .characteristic {
   display: flex;
   margin-top: 0.5rem;

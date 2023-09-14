@@ -2,13 +2,8 @@
 
 .container {
   position: relative;
-  color: $colorNeutral100;
-  a {
-    color: $colorNeutral100;
-    &:hover {
-      color: $colorPrimary;
-    }
-  }
+  border-top: 1px solid $colorNeutral150;
+  padding: 1rem 0;
   .main {
     position: relative;
     z-index: 2;

@@ -4,7 +4,11 @@ import style from "./ContainerWrapper.module.scss";
 const ContainerWrapper = (props) => {
   const { children } = props;
   const className = props.className ? " " + props.className : "";
-  return <div className={style.wrapper + className}>{children}</div>;
+  return (
+    <div className={style.container}>
+      <div className={style.containerBody}>{children}</div>
+    </div>
+  );
 };
 
 export default ContainerWrapper;

@@ -38,7 +38,7 @@ const AdminProduct = () => {
   };
 
   return (
-    <SectionWrapper>
+    <>
       <FormGroup>
         <FormItem grow={true}>
           {!isLoading && sortedProducts && (
@@ -76,7 +76,7 @@ const AdminProduct = () => {
           )}
         </>
       )}
-    </SectionWrapper>
+    </>
   );
 };
 

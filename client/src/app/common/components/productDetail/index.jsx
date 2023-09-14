@@ -9,6 +9,7 @@ const ProductDetail = (props) => {
     props;
   const { _id, addToBasket, inBasket, increaseInBasket, decreaseInBasket } =
     props;
+  const percentDiscount = ((100 * (priceSale - price)) / price).toFixed(0);
   return (
     <>
       <div>
@@ -44,8 +45,20 @@ const ProductDetail = (props) => {
           )}
         </div>
         <div className={style.right}>
-          <p className={style.price}>{price} ₽</p>
-          {priceSale && <p>{priceSale}</p>}
+          <div className={style.price}>
+            {!priceSale && <div className={style.regular}>{price} ₽</div>}
+            {priceSale && (
+              <>
+                <div className={style.discount}>
+                  <span>{price} ₽</span>
+                  {priceSale && (
+                    <div className={style.sale}>Скидка {percentDiscount}%</div>
+                  )}
+                </div>
+                <div className={style.regular}>{priceSale} ₽</div>
+              </>
+            )}
+          </div>
           {!inBasket && (
             <Button onClick={() => addToBasket(_id)} className={style.basket}>
               Добавить в корзину

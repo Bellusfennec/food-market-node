@@ -9,6 +9,7 @@ import ContainerWrapper, {
 import { getCategories } from "../../../store/category";
 import { getProducts, getProductsLoadingStatus } from "../../../store/product";
 import style from "./ListProducts.module.scss";
+import Container from "../../../common/components/container";
 
 const ListProducts = () => {
   const products = useSelector(getProducts());
@@ -26,34 +27,32 @@ const ListProducts = () => {
   };
 
   return (
-    <SectionWrapper>
-      <ContainerWrapper>
-        {isLoadingProducts && (
-          <>
-            <Loading />
-          </>
+    <Container>
+      {isLoadingProducts && (
+        <>
+          <Loading />
+        </>
+      )}
+      {!isLoadingProducts &&
+        categories?.length > 0 &&
+        categoriesListProducts(categories).map(
+          ({ name, _id, products }, i) =>
+            products?.length > 0 && (
+              <div key={_id} className={style.container}>
+                <h3 className={style.title}>{name}</h3>
+                <List>
+                  {products.map((product) => (
+                    <ProductCard
+                      key={product._id}
+                      {...product}
+                      link={`/product/detail/${product._id}`}
+                    />
+                  ))}
+                </List>
+              </div>
+            )
         )}
-        {!isLoadingProducts &&
-          categories?.length > 0 &&
-          categoriesListProducts(categories).map(
-            ({ name, _id, products }, i) =>
-              products?.length > 0 && (
-                <div key={_id} className={style.container}>
-                  <h3 className={style.title}>{name}</h3>
-                  <List>
-                    {products.map((product) => (
-                      <ProductCard
-                        key={product._id}
-                        {...product}
-                        link={`/product/detail/${product._id}`}
-                      />
-                    ))}
-                  </List>
-                </div>
-              )
-          )}
-      </ContainerWrapper>
-    </SectionWrapper>
+    </Container>
   );
 };
 

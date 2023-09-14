@@ -1,5 +1,10 @@
 @import "../../../app/common/styles/vars";
 
+.notFound {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .container {
   margin: 0 auto;
   width: 680px;
@@ -16,4 +21,20 @@
   margin: 3rem 0;
   border-top: 1px solid $colorNeutral150;
   border-bottom: 1px solid $colorNeutral150;
+}
+.containerResult {
+  & > div {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+  .result {
+    p {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+  }
 }

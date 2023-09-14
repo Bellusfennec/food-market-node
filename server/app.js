@@ -39,9 +39,9 @@ console.log(
 
 async function start() {
   try {
-    mongoose.connection.once("open", () => {
-      initDatabase();
-    });
+    // mongoose.connection.once("open", () => {
+    //   initDatabase();
+    // });
     await mongoose.connect(config.get("mongoUri"));
     console.log(chalk.green(`Mongo DB connected.`));
     app.listen(PORT, () =>

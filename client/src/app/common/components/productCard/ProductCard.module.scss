@@ -37,36 +37,7 @@
       display: flex;
       justify-content: space-between;
       margin-top: 1rem;
-      .price {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        .discount {
-          font-style: italic;
-          display: flex;
-          align-items: center;
-          color: $colorNeutral600;
-          font-size: 1rem;
-          span {
-            display: flex;
-            align-items: center;
-            position: relative;
-            &::before {
-              content: "";
-              width: 100%;
-              height: 2px;
-              background: $colorNeutral600;
-              position: absolute;
-            }
-          }
-        }
-        .regular {
-          font-size: 1.5rem;
-          display: flex;
-          align-items: center;
-          color: $colorNeutral800;
-        }
-      }
+
       .basket {
         width: auto;
       }
@@ -83,5 +54,36 @@ a.item {
   div {
     align-self: center;
     padding: 0 1rem;
+  }
+}
+.price {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .regular {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    color: $colorNeutral800;
+  }
+  .discount {
+    font-style: italic;
+    display: flex;
+    align-items: center;
+    color: $colorNeutral600;
+    font-size: 1rem;
+    span {
+      display: flex;
+      align-items: center;
+      position: relative;
+      &::before {
+        content: "";
+        width: 100%;
+        height: 2px;
+        background: $colorNeutral600;
+        position: absolute;
+      }
+    }
   }
 }

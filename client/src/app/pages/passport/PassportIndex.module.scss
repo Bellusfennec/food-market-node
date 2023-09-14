@@ -1,13 +1,25 @@
 @import "../../common/styles/vars";
 
 .container {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.main {
+  border: 1px solid $colorNeutral150;
+  border-radius: $borderRadius200;
+  padding: 1rem;
   width: 400px;
   @media screen and (max-width: 500px) {
     width: 100%;
   }
 }
-.logo {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 2rem;
+.block {
 }
+// .logo {
+//   display: flex;
+//   justify-content: center;
+//   margin-bottom: 2rem;
+// }
