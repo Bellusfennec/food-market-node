@@ -1,13 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { useParams } from "react-router-dom";
-import Divider from "../../common/components/divider/Divider";
-import MainLayout from "../../layouts/main";
-import { SectionWrapper } from "../../common/components/wrapper";
-import AdminProduct from "./AdminProduct";
-import AdminProductForm from "./AdminProductForm";
-import NavAdmin from "./components/NavAdmin";
 import Container from "../../common/components/container";
+import MainLayout from "../../layouts/main";
+import AdminProduct from "./product/AdminProduct";
+import AdminProductForm from "./product/AdminProductForm";
+import NavAdmin from "./product/NavAdmin";
 
 const AdminIndex = () => {
   const { page, action, id } = useParams();

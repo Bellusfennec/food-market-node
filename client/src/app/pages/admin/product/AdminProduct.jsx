@@ -1,14 +1,13 @@
 import _ from "lodash";
 import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
-import { Link } from "react-router-dom";
-import SearchInput from "../../common/components/form/SearchInput";
-import Loading from "../../common/components/loading";
-import { SectionWrapper } from "../../common/components/wrapper";
-import ProductsTable from "./components/ProductsTable";
-import { FormGroup, FormItem } from "../../common/components/form";
 import { useSelector } from "react-redux";
-import { getProducts, getProductsLoadingStatus } from "../../store/product";
+import { Link } from "react-router-dom";
+import { FormGroup, FormItem } from "../../../common/components/form";
+import SearchInput from "../../../common/components/form/SearchInput";
+import Loading from "../../../common/components/loading";
+import { getProducts, getProductsLoadingStatus } from "../../../store/product";
+import ProductsTable from "./ProductsTable";
 
 const AdminProduct = () => {
   const products = useSelector(getProducts());

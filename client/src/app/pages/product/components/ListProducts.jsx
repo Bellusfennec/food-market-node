@@ -1,15 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import List from "../../../common/components/card/List";
-import ProductCard from "../../../common/components/productCard";
+import Container from "../../../common/components/container";
 import Loading from "../../../common/components/loading";
-import ContainerWrapper, {
-  SectionWrapper,
-} from "../../../common/components/wrapper";
+import ProductCard from "../../../common/components/productCard";
 import { getCategories } from "../../../store/category";
 import { getProducts, getProductsLoadingStatus } from "../../../store/product";
 import style from "./ListProducts.module.scss";
-import Container from "../../../common/components/container";
 
 const ListProducts = () => {
   const products = useSelector(getProducts());

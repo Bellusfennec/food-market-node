@@ -1,9 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import { IoChevronBackOutline, IoTrashOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import Divider from "../../../app/common/components/divider/Divider";
 import {
   Button,
   Dropdown,
@@ -12,21 +11,21 @@ import {
   IconButton,
   TextInput,
   TextareaField,
-} from "../../../app/common/components/form";
-import Loading from "../../../app/common/components/loading";
-import useForm from "../../hooks/useForm";
-import { getCategories } from "../../store/category";
+} from "../../../common/components/form";
+import Loading from "../../../common/components/loading";
+import useForm from "../../../hooks/useForm";
+import { getCategories } from "../../../store/category";
+import { getCharacteristics } from "../../../store/characteristic";
 import {
   createdProduct,
   getProductById,
   getProductsLoadingStatus,
   removedProduct,
   updatedProduct,
-} from "../../store/product";
+} from "../../../store/product";
 import style from "./AdminProductForm.module.scss";
-import CategoryCreate from "./components/CategoryCreate";
-import CharacteristicsForm from "./components/CharacteristicsForm";
-import { getCharacteristics } from "../../store/characteristic";
+import CategoryCreate from "./CategoryCreate";
+import CharacteristicsForm from "./CharacteristicsForm";
 
 const AdminProductForm = () => {
   const { id } = useParams();
