@@ -9,7 +9,7 @@ import Loading from "../../../common/components/loading";
 import { getProducts, getProductsLoadingStatus } from "../../../store/product";
 import ProductsTable from "./ProductsTable";
 
-const AdminProduct = () => {
+const AdminProductPage = () => {
   const products = useSelector(getProducts());
   const isLoading = useSelector(getProductsLoadingStatus());
   const [sortBy, setSortBy] = useState({ path: "name", order: "asc" });
@@ -79,4 +79,4 @@ const AdminProduct = () => {
   );
 };
 
-export default AdminProduct;
+export default AdminProductPage;

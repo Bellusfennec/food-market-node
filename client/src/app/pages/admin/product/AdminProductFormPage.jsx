@@ -27,7 +27,7 @@ import style from "./AdminProductForm.module.scss";
 import CategoryCreate from "./CategoryCreate";
 import CharacteristicsForm from "./CharacteristicsForm";
 
-const AdminProductForm = () => {
+const AdminProductFormPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const categories = useSelector(getCategories());
@@ -194,4 +194,4 @@ const AdminProductForm = () => {
   );
 };
 
-export default React.memo(AdminProductForm);
+export default React.memo(AdminProductFormPage);

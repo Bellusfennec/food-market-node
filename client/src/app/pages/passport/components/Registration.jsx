@@ -58,7 +58,7 @@ const Registration = () => {
   };
 
   return (
-    <form onSubmit={handlerSubmit}>
+    <form onSubmit={handlerSubmit} className={style.container}>
       <div className={style.back}>
         <IconButton type="button" onClick={toLogin}>
           <IoChevronBackOutline />

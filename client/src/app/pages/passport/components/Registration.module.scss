@@ -1,5 +1,8 @@
 @import "../../../common/styles/vars";
 
+.container {
+  position: relative;
+}
 .hint {
   color: lightcoral;
 }
@@ -8,6 +11,6 @@
 }
 .back {
   position: absolute;
-  top: 1.8rem;
+  // top: 1.8rem;
   left: 2rem;
 }

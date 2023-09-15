@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import AdminIndex from "./pages/admin/AdminIndex.jsx";
+import AdminPage from "./pages/admin";
 import NotFoundIndex from "./pages/error/NotFoundIndex.jsx";
 import HomeIndex from "./pages/home/index.js";
 import PassportIndex from "./pages/passport/index.js";
@@ -15,7 +15,7 @@ const AppRoutes = () => {
       <Route path="logout" element={<PassportLoggedOut />} />
       <Route path="product/:page?/:productId?" element={<ProductIndex />} />
       <Route path="basket/:page?" element={<BasketIndex />} />
-      <Route path="admin/:page?/:action?/:id?" element={<AdminIndex />} />
+      <Route path="admin/:page?/:action?/:id?" element={<AdminPage />} />
       <Route path="*" element={<NotFoundIndex />} />
     </Routes>
   );

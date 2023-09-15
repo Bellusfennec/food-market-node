@@ -9,8 +9,13 @@
 /* flex-grow — определяет, сколько свободного места в контейнере переходит к элементу; */
 /* flex-shrink — определяет, насколько будет сокращаться элемент, когда для всего не будет достаточно места; */
 /* flex-basis — размер для элемента, установленный по умолчанию. */
-
+.header {
+  justify-content: space-between;
+}
 .main {
   flex: 1 0 auto;
   margin: 2rem 0;
+}
+.footer {
+  justify-content: space-between;
 }

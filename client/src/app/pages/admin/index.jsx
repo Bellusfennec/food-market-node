@@ -3,11 +3,13 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import Container from "../../common/components/container";
 import MainLayout from "../../layouts/main";
-import AdminProduct from "./product/AdminProduct";
-import AdminProductForm from "./product/AdminProductForm";
+import AdminProductPage from "./product/AdminProductPage";
+import AdminProductFormPage from "./product/AdminProductFormPage";
 import NavAdmin from "./product/NavAdmin";
+import AdminSpecificationPage from "./specification/AdminSpecificationPage";
+import AdminCategoryPage from "./category/AdminCategoryPage";
 
-const AdminIndex = () => {
+const AdminPage = () => {
   const { page, action, id } = useParams();
 
   return (
@@ -16,23 +18,34 @@ const AdminIndex = () => {
         <NavAdmin />
       </Container>
       <br />
+
       {page === "product" && action === "edit" && id && (
         <Container>
-          <AdminProductForm />
+          <AdminProductFormPage />
         </Container>
       )}
       {page === "product" && action === "create" && (
         <Container>
-          <AdminProductForm />
+          <AdminProductFormPage />
         </Container>
       )}
       {page === "product" && !action && (
         <Container>
-          <AdminProduct />
+          <AdminProductPage />
+        </Container>
+      )}
+      {page === "category" && !action && (
+        <Container>
+          <AdminCategoryPage />
+        </Container>
+      )}
+      {page === "specification" && !action && (
+        <Container>
+          <AdminSpecificationPage />
         </Container>
       )}
     </MainLayout>
   );
 };
 
-export default AdminIndex;
+export default AdminPage;

@@ -14,7 +14,7 @@ const Profile = () => {
   const navigate = useNavigate();
 
   return (
-    <>
+    <div className={style.container}>
       <div className={style.back}>
         <IconButton type="button" onClick={() => navigate("/passport/edit")}>
           <MdSettings />
@@ -28,7 +28,7 @@ const Profile = () => {
         <MdLogout />
         Выход
       </Button>
-    </>
+    </div>
   );
 };
 

@@ -2,10 +2,11 @@
 
 .container {
   display: flex;
-  height: 100%;
+  min-height: 100%;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+  flex: 1;
+  overflow-y: auto;
 }
 .main {
   border: 1px solid $colorNeutral150;
@@ -17,6 +18,7 @@
   }
 }
 .block {
+  height: 50%;
 }
 // .logo {
 //   display: flex;
