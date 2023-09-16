@@ -60,6 +60,14 @@ export const getFavoriteById = (id) => (state) => {
   const { entities } = state.favorite;
   return entities ? entities.find((c) => c === id) : entities;
 };
+export const getFavoriteProductList = () => (state) => {
+  const favorite = state.favorite.entities;
+  const product = state.product.entities;
+  if (favorite.length > 0 && product.length > 0) {
+    return favorite.map((m) => product.find((f) => f._id === m));
+  }
+  return [];
+};
 export const getFavoriteLoadingStatus = () => (state) =>
   state.favorite.isLoading;
 

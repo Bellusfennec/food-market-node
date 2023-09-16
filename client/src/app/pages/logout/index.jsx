@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { loggedOutUser } from "../../store/user";
 import { useNavigate } from "react-router-dom";
 
-const PassportLoggedOut = () => {
+const PassportLoggedOutPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -16,4 +16,4 @@ const PassportLoggedOut = () => {
   return <h1>Loading</h1>;
 };
 
-export default PassportLoggedOut;
+export default PassportLoggedOutPage;

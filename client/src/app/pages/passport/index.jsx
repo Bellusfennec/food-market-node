@@ -4,14 +4,14 @@ import { useSelector } from "react-redux";
 import { Navigate, useParams } from "react-router-dom";
 import Loading from "../../common/components/loading";
 import { getCurrentUser, getLoggedStatus } from "../../store/user";
-import style from "./PassportIndex.module.scss";
+import style from "./PassportPage.module.scss";
 import EditUser from "./components/EditUser";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
 import Registration from "./components/Registration";
 import PassportLayout from "../../layouts/passport";
 
-const PassportIndex = () => {
+const PassportPage = () => {
   const { page } = useParams();
   const isLogged = useSelector(getLoggedStatus());
   const user = useSelector(getCurrentUser());
@@ -38,4 +38,4 @@ const PassportIndex = () => {
   );
 };
 
-export default PassportIndex;
+export default PassportPage;

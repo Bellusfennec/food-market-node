@@ -2,7 +2,6 @@
 import PropTypes from "prop-types";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ErrorLayout from "../../pages/error/components";
 import {
   getLoggedStatus,
   getUserLoadingStatus,
@@ -12,6 +11,7 @@ import Loading from "../components/loading";
 import { loadSpecifications } from "../../store/specification";
 import { loadCategories } from "../../store/category";
 import { loadProducts } from "../../store/product";
+import ErrorLayout from "../../layouts/error/Error";
 
 const AppLoader = ({ children }) => {
   const dispatch = useDispatch();

@@ -2,24 +2,35 @@
 
 .container {
   display: flex;
-  justify-content: space-between;
   gap: 2rem;
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
+  }
 }
 .left {
-  width: 40%;
+  width: 300px;
+  @media screen and (max-width: 900px) {
+    width: 100%;
+  }
 }
 .center {
-  width: 320px;
+  width: 300px;
+  @media screen and (max-width: 900px) {
+    width: 100%;
+  }
 }
 .right {
   align-self: flex-start;
   padding: 1.5rem;
-  width: 30%;
+  width: 300px;
   display: flex;
   gap: 1rem;
   flex-direction: column;
   box-shadow: $boxShadow;
   border-radius: $borderRadius200;
+  @media screen and (max-width: 900px) {
+    width: calc(100% - 3rem);
+  }
 }
 .price {
   display: flex;

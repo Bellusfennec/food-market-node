@@ -3,7 +3,7 @@ import React from "react";
 import ListProducts from "../product/components/ListProducts";
 import MainLayout from "../../layouts/main";
 
-const HomeIndex = () => {
+const HomePage = () => {
   return (
     <MainLayout>
       <ListProducts />
@@ -11,4 +11,4 @@ const HomeIndex = () => {
   );
 };
 
-export default HomeIndex;
+export default HomePage;

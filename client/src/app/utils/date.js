@@ -27,3 +27,17 @@ export function displayDate(data) {
     date.getFullYear() + "." + (date.getMonth() + 1) + "_" + date.getDate()
   );
 }
+export function fullDate(data) {
+  const date = new Date(data);
+  const fullYear = date.getFullYear();
+  // const day = date.getDay();
+  const hour = date.getHours();
+  const minutes = date.getMinutes();
+  const dayMonth = date.getDate();
+  // const month = date.getMonth() + 1;
+  const fullMonth = date.toLocaleString("default", {
+    month: "long",
+  });
+
+  return `${dayMonth} ${fullMonth} ${fullYear} (${hour}:${minutes})`;
+}

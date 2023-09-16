@@ -1,6 +1,6 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   createName,
   createPlaceholder,
@@ -9,8 +9,6 @@ import {
 } from "../utils/form";
 
 const useForm = ({ onSubmit, FORM = {}, CONFIG = {} }) => {
-  // FORM = FORM ? FORM : {};
-  // CONFIG = CONFIG ? CONFIG : {};
   const [form, setForm] = useState(FORM);
   const [name, setName] = useState(createName(FORM));
   const initPlaceholder = createPlaceholder(FORM, CONFIG);

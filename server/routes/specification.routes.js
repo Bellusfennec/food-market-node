@@ -14,6 +14,7 @@ router.get("/", async (req, res) => {
       .json({ message: "На сервере произошла ошибка. Попробуйте позже" });
   }
 });
+
 router.post("/", auth, [
   check("name", "Минимальная длинна названия 1 символ").isLength({
     min: 1,
@@ -42,5 +43,41 @@ router.post("/", auth, [
     }
   },
 ]);
+
+router.delete("/:specificationId", auth, async (req, res) => {
+  try {
+    const { specificationId } = req.params;
+    const specification = await Specification.findById(specificationId);
+    await Specification.deleteOne(specification._id);
+
+    res.status(201).send(null);
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ message: "На сервере произошла ошибка. Попробуйте позже" });
+  }
+});
+
+router.patch("/:specificationId", auth, async (req, res) => {
+  try {
+    const { specificationId } = req.params;
+
+    const updated = await Specification.findByIdAndUpdate(
+      specificationId,
+      req.body,
+      {
+        new: true,
+      }
+    );
+
+    res.status(201).send(updated);
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ message: "На сервере произошла ошибка. Попробуйте позже" });
+  }
+});
 
 module.exports = router;

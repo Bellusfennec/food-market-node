@@ -4,8 +4,10 @@ import TableHeader from "../../../common/components/table/TableHeader";
 import TableBody from "../../../common/components/table/TableBody";
 import { Link, useNavigate } from "react-router-dom";
 import CategoryName from "../../../common/components/categoryName";
+import { Button } from "../../../common/components/form";
 
-const ProductsTable = ({ products, onDeleteProduct, onSort, selectedSort }) => {
+const ProductsTable = (props) => {
+  const { products, onSort, selectedSort } = props;
   const navigate = useNavigate();
   const columns = {
     title: {
@@ -27,12 +29,12 @@ const ProductsTable = ({ products, onDeleteProduct, onSort, selectedSort }) => {
     },
     edit: {
       component: (product) => (
-        <button
+        <Button
           className="btn btn-danger"
           onClick={() => navigate(`/admin/product/edit/${product._id}`)}
         >
           Редактировать
-        </button>
+        </Button>
       ),
     },
   };

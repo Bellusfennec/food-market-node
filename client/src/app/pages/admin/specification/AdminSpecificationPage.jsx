@@ -50,7 +50,7 @@ const AdminSpecificationPage = () => {
           )}
         </FormItem>
         <FormItem>
-          <Link to="/admin/product/create">
+          <Link to="/admin/specification/create">
             <FiPlus />
           </Link>
         </FormItem>
