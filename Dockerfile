@@ -1,4 +1,4 @@
-FROM node:14 as client
+FROM node:20 as client
 
 WORKDIR /app/client
 
@@ -8,9 +8,9 @@ RUN npm install
 
 COPY client /app/client
 
-RUN npm build
+RUN npm run build
 
-FROM node:16-alpine
+FROM node:20
 
 WORKDIR /app
 
