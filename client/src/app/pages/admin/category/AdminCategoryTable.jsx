@@ -3,10 +3,11 @@ import Table from "../../../common/components/table";
 import TableHeader from "../../../common/components/table/TableHeader";
 import TableBody from "../../../common/components/table/TableBody";
 import { useNavigate } from "react-router-dom";
-import { displayDate } from "../../../utils/dispalyDate";
+import { fullDate } from "../../../utils/date";
+import { Button } from "../../../common/components/form";
 
 const AdminCategoryTable = (props) => {
-  const { sorted, onDeleteProduct, onSort, selectedSort } = props;
+  const { sorted, onSort, selectedSort } = props;
   const navigate = useNavigate();
   const columns = {
     title: {
@@ -17,18 +18,16 @@ const AdminCategoryTable = (props) => {
     characteristics: {
       path: "createdAt",
       name: "Дата создания",
-      component: (sorted) => {
-        return <p>{displayDate(sorted.createdAt)}</p>;
-      },
+      component: (sorted) => <p>{fullDate(sorted.createdAt)}</p>,
     },
     edit: {
       component: (sorted) => (
-        <button
+        <Button
           className="btn btn-danger"
           onClick={() => navigate(`/admin/category/edit/${sorted._id}`)}
         >
           Редактировать
-        </button>
+        </Button>
       ),
     },
   };

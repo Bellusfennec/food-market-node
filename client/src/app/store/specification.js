@@ -25,6 +25,30 @@ export const createSpecification = createAsyncThunk(
   }
 );
 
+export const updateSpecification = createAsyncThunk(
+  "specification/update",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { content } = await specificationService.update(payload);
+      return content;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const deleteSpecification = createAsyncThunk(
+  "specification/delete",
+  async (id, { rejectWithValue }) => {
+    try {
+      await specificationService.delete(id);
+      return id;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 const initialState = {
   entities: [],
   isLoading: true,
@@ -60,11 +84,36 @@ const specificationSlice = createSlice({
       state.isLoading = false;
       state.error = null;
     },
+    [updateSpecification.pending]: (state) => {
+      state.isLoading = true;
+      state.error = null;
+    },
+    [updateSpecification.fulfilled]: (state, { payload }) => {
+      state.isLoading = false;
+      const index = state.entities.findIndex((el) => el._id === payload._id);
+      state.entities[index] = { ...state.entities[index], ...payload };
+    },
+    [updateSpecification.rejected]: (state) => {
+      state.isLoading = false;
+      state.error = null;
+    },
+    [deleteSpecification.pending]: (state) => {
+      state.isLoading = true;
+      state.error = null;
+    },
+    [deleteSpecification.fulfilled]: (state, { payload }) => {
+      state.isLoading = false;
+      state.entities = state.entities.filter((f) => f._id !== payload);
+    },
+    [createSpecification.rejected]: (state) => {
+      state.isLoading = false;
+      state.error = null;
+    },
   },
 });
 
-const { actions, reducer: specificationReducer } = specificationSlice;
-const {} = actions;
+const { reducer: specificationReducer } = specificationSlice;
+// const {} = actions;
 
 export const getSpecifications = () => (state) => state.specification.entities;
 export const getSpecificationById = (id) => (state) => {

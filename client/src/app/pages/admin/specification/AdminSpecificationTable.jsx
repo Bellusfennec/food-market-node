@@ -3,13 +3,10 @@ import { useNavigate } from "react-router-dom";
 import Table from "../../../common/components/table";
 import TableBody from "../../../common/components/table/TableBody";
 import TableHeader from "../../../common/components/table/TableHeader";
+import { fullDate } from "../../../utils/date";
+import { Button } from "../../../common/components/form";
 
-const AdminSpecificationTable = ({
-  sorted,
-  onDeleteProduct,
-  onSort,
-  selectedSort,
-}) => {
+const AdminSpecificationTable = ({ sorted, onSort, selectedSort }) => {
   const navigate = useNavigate();
   const columns = {
     title: {
@@ -20,16 +17,16 @@ const AdminSpecificationTable = ({
     characteristics: {
       path: "createdAt",
       name: "Дата создания",
-      component: (sorted) => <p>{sorted.createdAt}</p>,
+      component: (sorted) => <p>{fullDate(sorted.createdAt)}</p>,
     },
     edit: {
       component: (sorted) => (
-        <button
+        <Button
           className="btn btn-danger"
           onClick={() => navigate(`/admin/specification/edit/${sorted._id}`)}
         >
           Редактировать
-        </button>
+        </Button>
       ),
     },
   };

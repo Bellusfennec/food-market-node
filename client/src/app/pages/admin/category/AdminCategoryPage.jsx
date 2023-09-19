@@ -50,7 +50,7 @@ const AdminCategoryPage = () => {
           )}
         </FormItem>
         <FormItem>
-          <Link to="/admin/product/create">
+          <Link to="/admin/category/create">
             <FiPlus />
           </Link>
         </FormItem>

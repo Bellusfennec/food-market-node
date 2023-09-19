@@ -5,9 +5,9 @@ import BasketProduct from "../../common/components/basketProduct";
 import { Button, IconButton } from "../../common/components/form";
 import MainLayout from "../../layouts/main";
 import { deleteFormBasket, getBasket, getBasketSum } from "../../store/basket";
-import style from "./BasketIndex.module.scss";
+import style from "./BasketPage.module.scss";
 
-const BasketIndex = () => {
+const BasketPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const basket = useSelector(getBasket());
@@ -58,4 +58,4 @@ const BasketIndex = () => {
   );
 };
 
-export default BasketIndex;
+export default BasketPage;

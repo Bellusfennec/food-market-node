@@ -5,7 +5,7 @@ import MainLayout from "../../layouts/main";
 import ProductDetailPage from "./ProductDetailPage";
 import ListProducts from "./components/ListProducts";
 
-const ProductIndex = () => {
+const ProductPage = () => {
   const { page, productId } = useParams();
 
   return (
@@ -20,4 +20,4 @@ const ProductIndex = () => {
   );
 };
 
-export default ProductIndex;
+export default ProductPage;

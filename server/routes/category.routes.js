@@ -43,4 +43,36 @@ router.post("/", auth, [
   },
 ]);
 
+router.delete("/:categoryId", auth, async (req, res) => {
+  try {
+    const { categoryId } = req.params;
+    const category = await Category.findById(categoryId);
+    await Category.deleteOne(category._id);
+
+    res.status(201).send(null);
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ message: "На сервере произошла ошибка. Попробуйте позже" });
+  }
+});
+
+router.patch("/:categoryId", auth, async (req, res) => {
+  try {
+    const { categoryId } = req.params;
+
+    const updated = await Category.findByIdAndUpdate(categoryId, req.body, {
+      new: true,
+    });
+
+    res.status(201).send(updated);
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ message: "На сервере произошла ошибка. Попробуйте позже" });
+  }
+});
+
 module.exports = router;

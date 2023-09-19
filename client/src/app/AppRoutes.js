@@ -1,22 +1,24 @@
 import { Route, Routes } from "react-router-dom";
 import AdminPage from "./pages/admin";
-import NotFoundIndex from "./pages/error/NotFoundIndex.jsx";
-import HomeIndex from "./pages/home/index.js";
-import PassportIndex from "./pages/passport/index.js";
-import ProductIndex from "./pages/product/index.js";
-import PassportLoggedOut from "./pages/passport/PassportLoggedOut.jsx";
-import BasketIndex from "./pages/basket/basketIndex.jsx";
+import ErrorPage from "./pages/error";
+import HomePage from "./pages/home";
+import PassportPage from "./pages/passport";
+import ProductPage from "./pages/product";
+import PassportLoggedOutPage from "./pages/logout";
+import BasketPage from "./pages/basket";
+import FavoritePage from "./pages/favorite";
 
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route index element={<HomeIndex />} />
-      <Route path="passport/:page?" element={<PassportIndex />} />
-      <Route path="logout" element={<PassportLoggedOut />} />
-      <Route path="product/:page?/:productId?" element={<ProductIndex />} />
-      <Route path="basket/:page?" element={<BasketIndex />} />
+      <Route index element={<HomePage />} />
+      <Route path="passport/:page?" element={<PassportPage />} />
+      <Route path="logout" element={<PassportLoggedOutPage />} />
+      <Route path="product/:page?/:productId?" element={<ProductPage />} />
+      <Route path="basket/:page?" element={<BasketPage />} />
+      <Route path="favorite" element={<FavoritePage />} />
       <Route path="admin/:page?/:action?/:id?" element={<AdminPage />} />
-      <Route path="*" element={<NotFoundIndex />} />
+      <Route path="*" element={<ErrorPage />} />
     </Routes>
   );
 };

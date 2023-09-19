@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { getLoggedStatus } from "../../../store/user";
 import style from "./NavBarUser.module.scss";
 import { getBasket } from "../../../store/basket";
+import { MdFavoriteBorder } from "react-icons/md";
 
 const NavBarUser = () => {
   const isLoggedIn = useSelector(getLoggedStatus());
@@ -14,18 +15,21 @@ const NavBarUser = () => {
 
   return (
     <div className={style.userMenu}>
+      <Link to="/basket" title="Корзина" className={style.basket}>
+        <AiOutlineShoppingCart />
+        {basketCount > 0 && (
+          <div className={style.basketCount}>
+            <span>{basketCount}</span>
+          </div>
+        )}
+      </Link>
+      <Link to="/favorite" title="Отложенные">
+        <MdFavoriteBorder />
+      </Link>
       {isLoggedIn ? (
         <>
           <Link to="/admin" className={style.item}>
             admin
-          </Link>
-          <Link to="/basket" title="Корзина" className={style.basket}>
-            <AiOutlineShoppingCart />
-            {basketCount > 0 && (
-              <div className={style.basketCount}>
-                <span>{basketCount}</span>
-              </div>
-            )}
           </Link>
           <Link to="/passport/profile" title="Профиль" className={style.user}>
             <AiOutlineUser />{" "}

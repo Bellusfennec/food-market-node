@@ -28,14 +28,14 @@ const ProductDetailPage = () => {
   const inBasket = useSelector(getBasketById(productId));
 
   useEffect(() => {
-    if (product) {
+    if (product && characteristics.length === 0) {
       dispatch(getCharacteristics(product.characteristics))
         .unwrap()
         .then((result) => {
           setCharacteristics(result);
         });
     }
-  }, [productId]);
+  }, [productId, product]);
 
   const handlerAddToBasket = (id) => dispatch(addToBasket(id));
   const handlerIncreaseInBasket = (id) => dispatch(increaseInBasket(id));

@@ -1,0 +1,6 @@
+{
+  "port": 8080,
+  "mongoUri": "mongodb+srv://bellusfennec:fd4321@cluster0.atpubeg.mongodb.net/?retryWrites=true&w=majority",
+  "accessSecret": "super secret access",
+  "refreshSecret": "super secret refresh"
+}

@@ -26,6 +26,7 @@ import {
 import style from "./AdminProductForm.module.scss";
 import CategoryCreate from "./CategoryCreate";
 import CharacteristicsForm from "./CharacteristicsForm";
+import ContainerCenter from "../../../common/components/containerCenter";
 
 const AdminProductFormPage = () => {
   const { id } = useParams();
@@ -109,15 +110,17 @@ const AdminProductFormPage = () => {
           <IoChevronBackOutline />
         </IconButton>
       </div>
-      <div className={style.remove}>
-        <IconButton
-          type="button"
-          onClick={() => handlerRemoveProduct(form._id)}
-        >
-          <IoTrashOutline />
-        </IconButton>
-      </div>
-      <h3 className={style.label}>Новый товар</h3>
+      {product && (
+        <div className={style.remove}>
+          <IconButton
+            type="button"
+            onClick={() => handlerRemoveProduct(form._id)}
+          >
+            <IoTrashOutline />
+          </IconButton>
+        </div>
+      )}
+      <h3 className={style.label}>{product ? "Редактирование" : "Новый"}</h3>
       <br />
       <br />
       <FormGroup>
@@ -174,7 +177,7 @@ const AdminProductFormPage = () => {
         <FormItem grow="1">
           <TextInput
             name={name.priceSale}
-            value={form.priceSale}
+            value={form.priceSale || ""}
             error={error.priceSale}
             placeholder={placeholder.priceSale}
             onChange={handlerChange}
@@ -185,7 +188,6 @@ const AdminProductFormPage = () => {
 
       <br />
       <CharacteristicsForm value={form.characteristics} setForm={setForm} />
-      <br />
       <br />
       <Button disabled={!isValid}>
         {isLoading ? <Loading /> : product ? "Обновить" : "Создать"}

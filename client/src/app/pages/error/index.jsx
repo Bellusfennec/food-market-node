@@ -1,10 +1,9 @@
 import React from "react";
-// import style from "./NotFoundPage.module.scss";
-import ErrorLayout from "./components";
 import { Link, useParams } from "react-router-dom";
 import Divider from "../../common/components/divider/Divider";
+import ErrorLayout from "../../layouts/error/Error";
 
-const NotFoundIndex = () => {
+const ErrorPage = () => {
   console.log(useParams());
 
   return (
@@ -18,4 +17,4 @@ const NotFoundIndex = () => {
   );
 };
 
-export default NotFoundIndex;
+export default ErrorPage;
