@@ -18,6 +18,7 @@ const ListProducts = () => {
   const isLoadingCategories = useSelector(getCategoriesLoadingStatus());
   const [categoriesList, setCategoriesList] = useState([]);
 
+  console.log(process.env.NODE_ENV);
   useEffect(() => {
     if (products.length > 0 && categories.length > 0) {
       const list = categories.map((category) => {

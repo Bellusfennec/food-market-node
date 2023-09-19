@@ -2,11 +2,14 @@ const express = require("express");
 const mongoose = require("mongoose");
 const chalk = require("chalk");
 const config = require("config");
-const initDatabase = require("./startUp/initDatabase");
 const routes = require("./routes");
 const cors = require("cors");
 const path = require("path");
+const { ip } = require("./utils/networkIp");
 
+console.log(ip);
+
+const PORT = config.get("port") ?? 8080;
 const app = express();
 
 app.use(
@@ -29,26 +32,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api", routes);
 
-const PORT = config.get("port") ?? 8080;
-
 if (process.env.NODE_ENV === "production") {
-  console.log("NODE_ENV: ", chalk.blue("Production"));
   app.use("/", express.static(path.join(__dirname, "client")));
-
-  const indexPath = path.join(__dirname, "client", "index.html");
-
   app.get("*", (req, res) => {
-    res.sendFile(indexPath);
+    res.sendFile(path.join(__dirname, "client", "index.html"));
   });
+  console.log("NODE_ENV: ", chalk.blue("Production"));
 } else {
   console.log("NODE_ENV: ", chalk.redBright("Development"));
 }
 
 async function start() {
   try {
-    // mongoose.connection.once("open", () => {
-    //   initDatabase();
-    // });
     await mongoose.connect(config.get("mongoUri"));
     console.log(chalk.green(`Mongo DB connected.`));
     app.listen(PORT, () =>
