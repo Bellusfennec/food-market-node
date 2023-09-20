@@ -4,9 +4,7 @@ const ContainerCenter = (props) => {
   const { children } = props;
   return (
     <div className={style.container}>
-      <div className={style.center}>
-        <div className={style.block}>{children}</div>
-      </div>
+      <div className={style.main}>{children}</div>
     </div>
   );
 };

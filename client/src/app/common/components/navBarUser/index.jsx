@@ -1,17 +1,16 @@
 import React from "react";
 import { AiOutlineShoppingCart, AiOutlineUser } from "react-icons/ai";
 import { IoChevronBackOutline } from "react-icons/io5";
+import { MdFavoriteBorder } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { getBasketCount } from "../../../store/basket";
 import { getLoggedStatus } from "../../../store/user";
 import style from "./NavBarUser.module.scss";
-import { getBasket } from "../../../store/basket";
-import { MdFavoriteBorder } from "react-icons/md";
 
 const NavBarUser = () => {
   const isLoggedIn = useSelector(getLoggedStatus());
-  const isBasket = useSelector(getBasket());
-  const basketCount = isBasket.length;
+  const basketCount = useSelector(getBasketCount());
 
   return (
     <div className={style.userMenu}>

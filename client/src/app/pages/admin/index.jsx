@@ -2,15 +2,16 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import Container from "../../common/components/container";
+import WrapperBorder from "../../common/components/wrapperBorder";
 import MainLayout from "../../layouts/main";
-import AdminProductPage from "./product/AdminProductPage";
-import AdminProductFormPage from "./product/AdminProductFormPage";
-import NavAdmin from "./product/NavAdmin";
-import AdminSpecificationPage from "./specification/AdminSpecificationPage";
-import AdminCategoryPage from "./category/AdminCategoryPage";
-import AdminSpecificationFormPage from "./specification/AdminSpecificationFormPage";
+import style from "./AdminPage.module.scss";
 import AdminCategoryFormPage from "./category/AdminCategoryFormPage";
-import ContainerCenter from "../../common/components/containerCenter";
+import AdminCategoryPage from "./category/AdminCategoryPage";
+import AdminProductFormPage from "./product/AdminProductFormPage";
+import AdminProductPage from "./product/AdminProductPage";
+import NavAdmin from "./product/NavAdmin";
+import AdminSpecificationFormPage from "./specification/AdminSpecificationFormPage";
+import AdminSpecificationPage from "./specification/AdminSpecificationPage";
 
 const AdminPage = () => {
   const { page, action, id } = useParams();
@@ -27,14 +28,18 @@ const AdminPage = () => {
         </Container>
       )}
       {page === "product" && action === "edit" && id && (
-        <ContainerCenter>
-          <AdminProductFormPage />
-        </ContainerCenter>
+        <Container className={style.width}>
+          <WrapperBorder>
+            <AdminProductFormPage />
+          </WrapperBorder>
+        </Container>
       )}
       {page === "product" && action === "create" && (
-        <ContainerCenter>
-          <AdminProductFormPage />
-        </ContainerCenter>
+        <Container className={style.width}>
+          <WrapperBorder>
+            <AdminProductFormPage />
+          </WrapperBorder>
+        </Container>
       )}
 
       {page === "category" && !action && (
@@ -43,14 +48,18 @@ const AdminPage = () => {
         </Container>
       )}
       {page === "category" && action === "edit" && id && (
-        <ContainerCenter>
-          <AdminCategoryFormPage />
-        </ContainerCenter>
+        <Container className={style.width}>
+          <WrapperBorder>
+            <AdminCategoryFormPage />
+          </WrapperBorder>
+        </Container>
       )}
       {page === "category" && action === "create" && (
-        <ContainerCenter>
-          <AdminCategoryFormPage />
-        </ContainerCenter>
+        <Container className={style.width}>
+          <WrapperBorder>
+            <AdminCategoryFormPage />
+          </WrapperBorder>
+        </Container>
       )}
       {page === "specification" && !action && (
         <Container>
@@ -58,14 +67,18 @@ const AdminPage = () => {
         </Container>
       )}
       {page === "specification" && action === "edit" && id && (
-        <ContainerCenter>
-          <AdminSpecificationFormPage />
-        </ContainerCenter>
+        <Container className={style.width}>
+          <WrapperBorder>
+            <AdminSpecificationFormPage />
+          </WrapperBorder>
+        </Container>
       )}
       {page === "specification" && action === "create" && (
-        <ContainerCenter>
-          <AdminSpecificationFormPage />
-        </ContainerCenter>
+        <Container className={style.width}>
+          <WrapperBorder>
+            <AdminSpecificationFormPage />
+          </WrapperBorder>
+        </Container>
       )}
     </MainLayout>
   );

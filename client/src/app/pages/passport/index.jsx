@@ -4,12 +4,13 @@ import { useSelector } from "react-redux";
 import { Navigate, useParams } from "react-router-dom";
 import Loading from "../../common/components/loading";
 import { getCurrentUser, getLoggedStatus } from "../../store/user";
-import style from "./PassportPage.module.scss";
 import EditUser from "./components/EditUser";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
 import Registration from "./components/Registration";
 import PassportLayout from "../../layouts/passport";
+import ContainerCenter from "../../common/components/containerCenter";
+import MainLayout from "../../layouts/main";
 
 const PassportPage = () => {
   const { page } = useParams();
@@ -23,18 +24,36 @@ const PassportPage = () => {
     return <Navigate to="/passport/login" />;
   }
 
+  if (isLogged && !user) {
+    return (
+      <PassportLayout>
+        <ContainerCenter>
+          <Loading />
+        </ContainerCenter>
+      </PassportLayout>
+    );
+  }
+
+  if (isLogged && user) {
+    return (
+      <MainLayout>
+        <ContainerCenter>
+          {page === "profile" && <Profile />}
+          {page === "edit" && <EditUser />}
+        </ContainerCenter>
+      </MainLayout>
+    );
+  }
+
   return (
-    <PassportLayout>
-      <div className={style.container}>
-        <div className={style.main}>
-          {isLogged && !user && <Loading />}
-          {isLogged && user && page === "profile" && <Profile />}
-          {isLogged && user && page === "edit" && <EditUser />}
-          {!isLogged && page === "login" && <Login />}
-          {!isLogged && page === "registration" && <Registration />}
-        </div>
-      </div>
-    </PassportLayout>
+    !isLogged && (
+      <PassportLayout>
+        <ContainerCenter>
+          {page === "login" && <Login />}
+          {page === "registration" && <Registration />}
+        </ContainerCenter>
+      </PassportLayout>
+    )
   );
 };
 

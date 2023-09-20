@@ -5,7 +5,12 @@ import configFile from "../../config";
 import localStorageService from "./localStorage.service";
 import authService from "./auth.service";
 
-const http = axios.create({ baseURL: configFile.apiEndPoint });
+const apiEndPoint =
+  process.env.NODE_ENV === "production"
+    ? configFile.apiEndPoint
+    : configFile.devApiEndPoint;
+
+const http = axios.create({ baseURL: apiEndPoint });
 
 http.interceptors.request.use(
   async function (config) {

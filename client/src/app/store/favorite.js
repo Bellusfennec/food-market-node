@@ -18,7 +18,9 @@ export const deleteFavorite = (productId) => (dispatch, getState) => {
   try {
     const { entities } = getState().favorite;
     const itemsList = entities.filter((f) => f !== productId);
-    favoriteService.set(itemsList);
+    itemsList.length === 0
+      ? favoriteService.delete()
+      : favoriteService.set(itemsList);
     dispatch(fulfilled(itemsList));
   } catch (error) {
     dispatch(rejected(error));

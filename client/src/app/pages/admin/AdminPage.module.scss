@@ -1,0 +1,8 @@
+@import "../../../app/common/styles/vars";
+
+.width {
+  width: 700px;
+  @media screen and (max-width: 800px) {
+    width: 90%;
+  }
+}

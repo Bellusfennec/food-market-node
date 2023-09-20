@@ -12,6 +12,7 @@ import { loadSpecifications } from "../../store/specification";
 import { loadCategories } from "../../store/category";
 import { loadProducts } from "../../store/product";
 import ErrorLayout from "../../layouts/error/Error";
+import { loadBasket } from "../../store/basket";
 
 const AppLoader = ({ children }) => {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const AppLoader = ({ children }) => {
     dispatch(loadProducts());
     dispatch(loadCategories());
     dispatch(loadSpecifications());
+    dispatch(loadBasket());
     if (isLogged) dispatch(loadedUser());
   }, [isLogged]);
 

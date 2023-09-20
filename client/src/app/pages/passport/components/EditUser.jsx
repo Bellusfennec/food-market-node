@@ -25,7 +25,7 @@ const EditUser = () => {
     password: { isRequired: "" },
   };
 
-  const FORM = { ...user };
+  const FORM = { ...user, password: "" };
   const {
     handlerChange,
     handlerSubmit,

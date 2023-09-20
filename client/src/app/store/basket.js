@@ -1,6 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import basketService from "../services/basket.service";
 
+export const loadBasket = () => (dispatch) => {
+  dispatch(pending());
+  try {
+    const basket = basketService.get();
+    const itemsList = basket ? basket : [];
+    dispatch(fulfilled(itemsList));
+  } catch (error) {
+    dispatch(rejected(error));
+  }
+};
+
 export const addToBasket = (productId) => (dispatch, getState) => {
   dispatch(pending());
   try {
@@ -43,28 +54,29 @@ export const decreaseInBasket = (productId) => (dispatch, getState) => {
     };
     if (itemsList[index].productCount === 0) {
       itemsList = itemsList.filter((f) => f.productId !== productId);
+      console.log(itemsList);
     }
-    basketService.set(itemsList);
+    itemsList.length === 0
+      ? basketService.delete()
+      : basketService.set(itemsList);
     dispatch(fulfilled(itemsList));
   } catch (error) {
     dispatch(rejected(error));
   }
 };
 
-export const deleteFormBasket = () => (dispatch) => {
+export const deleteBasket = () => (dispatch) => {
   dispatch(pending());
   try {
-    basketService.set([]);
+    basketService.delete();
     dispatch(fulfilled([]));
   } catch (error) {
     dispatch(rejected(error));
   }
 };
 
-const basket = basketService.get();
-const entities = basket ? basket : [];
 const initialState = {
-  entities,
+  entities: [],
   isLoading: true,
   error: null,
 };
@@ -96,13 +108,25 @@ export const getBasketById = (id) => (state) => {
   const { entities } = state.basket;
   return entities ? entities.find((c) => c.productId === id) : entities;
 };
+export const getBasketCount = () => (state) => {
+  const basket = state.basket.entities;
+  if (!basket) return 0;
+  return basket?.length;
+};
 export const getBasketSum = () => (state) => {
   const basket = state.basket.entities;
   const product = state.product.entities;
   let sum = 0;
+  if (basket.length === 0 || product.length === 0) return sum;
   basket.forEach((m) => {
-    const { price, priceSale } = product.find((f) => f._id === m.productId);
-    sum += priceSale ? priceSale : price;
+    const { productId, productCount } = m;
+    const item = product.find((f) => f._id === productId);
+    const { price, priceSale } = item;
+    if (priceSale) {
+      sum += priceSale * productCount;
+    } else {
+      sum += price * productCount;
+    }
   });
   return sum;
 };

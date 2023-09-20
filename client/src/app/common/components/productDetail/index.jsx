@@ -5,10 +5,9 @@ import SpecificationName from "../specificationName/index";
 import Image from "../image";
 
 const ProductDetail = (props) => {
-  const { name, image, category, price, priceSale, characteristicsList } =
-    props;
-  const { _id, addToBasket, inBasket, increaseInBasket, decreaseInBasket } =
-    props;
+  const { image, category, price, priceSale, characteristicsList } = props;
+  const { _id, name, description } = props;
+  const { addToBasket, inBasket, increaseInBasket, decreaseInBasket } = props;
   const percentDiscount = ((100 * (priceSale - price)) / price).toFixed(0);
   return (
     <>
@@ -23,10 +22,17 @@ const ProductDetail = (props) => {
           <Image alt={name} image={image} />
         </div>
         <div className={style.center}>
-          <p>
-            Категория: <CategoryName id={category} />
-          </p>
-
+          <h5>Категория</h5>
+          <CategoryName id={category} />
+          <br />
+          {description && (
+            <>
+              <br />
+              <h5>Описание</h5>
+              {description}
+              <br />
+            </>
+          )}
           {characteristicsList.length > 0 && (
             <>
               <br />

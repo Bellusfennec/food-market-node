@@ -1,4 +1,5 @@
 {
+  "devApiEndPoint": "http://localhost:8080/api/",
   "apiEndPoint": "http://31.129.33.168/api/",
   "publicUrl": ".",
   "imageUrl": "./image/"
