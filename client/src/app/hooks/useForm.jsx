@@ -20,9 +20,12 @@ const useForm = ({ onSubmit, FORM = {}, CONFIG = {} }) => {
 
   // обработчик изменений
   const handlerChange = (e) => {
-    const { value, name } = e.target;
-
-    setForm({ ...form, [name]: value });
+    const { value, name, type, files } = e.target;
+    if (type === "file") {
+      setForm({ ...form, [name]: files[0] });
+    } else {
+      setForm({ ...form, [name]: value });
+    }
   };
 
   // обработчик кнопки Submit

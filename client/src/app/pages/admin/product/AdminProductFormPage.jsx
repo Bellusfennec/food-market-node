@@ -27,6 +27,7 @@ import style from "./AdminProductForm.module.scss";
 import CategoryCreate from "./CategoryCreate";
 import CharacteristicsForm from "./CharacteristicsForm";
 import ContainerCenter from "../../../common/components/containerCenter";
+import ImageField from "../../../common/components/form/ImageField";
 
 const AdminProductFormPage = () => {
   const { id } = useParams();
@@ -72,8 +73,9 @@ const AdminProductFormPage = () => {
       dispatch(updatedProduct(data));
       navigate(`/admin/product`);
     } else {
-      dispatch(createdProduct(data));
-      navigate(`/admin/product`);
+      // dispatch(createdProduct(data));
+      // navigate(`/admin/product`);
+      console.log(data);
     }
   }
 
@@ -122,6 +124,18 @@ const AdminProductFormPage = () => {
       )}
       <h3 className={style.label}>{product ? "Редактирование" : "Новый"}</h3>
       <br />
+      <br />
+      <FormGroup>
+        <FormItem grow="1">
+          <ImageField
+            name={name.image}
+            value={form.image}
+            error={error.image}
+            onChange={handlerChange}
+            onBlur={handlerBlur}
+          />
+        </FormItem>
+      </FormGroup>
       <br />
       <FormGroup>
         <FormItem grow="1">
