@@ -1,24 +1,19 @@
 import React, { useState } from "react";
 import style from "./ImageField.module.scss";
-import configFile from "../../../../config/index.json";
+import configFile from "../../../../config";
 
 const ImageField = (props) => {
   const { name, value, error, onChange, onBlur, placeholder } = props;
   const [preview, setPreview] = useState({});
   const image = preview?.src ? preview?.src : configFile.imageUrl + value;
 
-  console.log("value", value);
-  console.log("preview", preview);
-
   const handler = (event) => {
-    console.log("event", event);
     const file = event.target.files[0];
     const reader = new FileReader();
     if (file) {
       reader.readAsDataURL(file);
       reader.onloadend = () => {
-        console.log(reader);
-        setPreview({ ...event.target.files[0], src: reader.result });
+        setPreview({ ...file, name: file.name, src: reader.result });
       };
       onChange(event);
     }

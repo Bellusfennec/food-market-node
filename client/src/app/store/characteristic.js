@@ -79,9 +79,7 @@ const characteristicSlice = createSlice({
   },
 });
 
-const { actions, reducer: characteristicReducer } = characteristicSlice;
-const { recived, created, removed, updated, requested, requestFailed } =
-  actions;
+const { reducer: characteristicReducer } = characteristicSlice;
 
 export const getCharacteristicById = (id) => (state) => {
   const { entities } = state.characteristic;

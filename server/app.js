@@ -5,6 +5,7 @@ const config = require("config");
 const routes = require("./routes");
 const cors = require("cors");
 const path = require("path");
+const fileUpload = require("express-fileupload");
 
 const PORT = config.get("port") ?? 8080;
 const app = express();
@@ -12,6 +13,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.resolve(__dirname, "static")));
+app.use(fileUpload({}));
 app.use("/api", routes);
 
 if (process.env.NODE_ENV === "production") {

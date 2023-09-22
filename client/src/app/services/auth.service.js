@@ -2,13 +2,8 @@ import axios from "axios";
 import localStorageService from "./localStorage.service";
 import configFile from "../../config";
 
-const apiEndPoint =
-  process.env.NODE_ENV === "production"
-    ? configFile.apiEndPoint
-    : configFile.devApiEndPoint;
-
 export const httpAuth = axios.create({
-  baseURL: apiEndPoint + "auth/",
+  baseURL: configFile.apiUrl + "auth/",
   // params: {
   //   key: process.env.REACT_APP_FIREBASE_KEY,
   // },

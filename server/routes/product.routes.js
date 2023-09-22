@@ -4,6 +4,8 @@ const Product = require("../models/Product");
 const Characteristic = require("../models/Characteristic");
 const auth = require("../middleware/auth.middleware");
 const { check, validationResult } = require("express-validator");
+const { nanoid } = require("nanoid");
+const path = require("path");
 
 router.get("/", async (req, res) => {
   try {
@@ -75,11 +77,18 @@ router.delete("/:productId", auth, async (req, res) => {
 
 router.patch("/:productId", auth, async (req, res) => {
   try {
+    const ID = nanoid();
     const { productId } = req.params;
     const findProduct = await Product.findById(productId);
+    const image = req.files ? ID + ".jpg" : findProduct.image;
+    if (req.files) {
+      const newImage = req.files.image;
+      newImage.mv(path.resolve(__dirname, "..", "static", image));
+    }
 
     const characteristicsIds = [];
-    for (let item of req.body.characteristics) {
+    const characteristicsList = JSON.parse(req.body.characteristics);
+    for (let item of characteristicsList) {
       if (item._id < 5) {
         delete item?._id;
         const newSpecification = await Characteristic.create(item);
@@ -90,7 +99,7 @@ router.patch("/:productId", auth, async (req, res) => {
           item,
           { new: true }
         );
-        characteristicsIds.push(updSpecification._id);
+        if (updSpecification) characteristicsIds.push(updSpecification._id);
       }
     }
     for (let item of findProduct.characteristics) {
@@ -102,6 +111,7 @@ router.patch("/:productId", auth, async (req, res) => {
 
     const product = {
       ...req.body,
+      image: image,
       characteristics: characteristicsIds,
     };
     const updProduct = await Product.findByIdAndUpdate(productId, product, {

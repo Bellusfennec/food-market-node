@@ -15,11 +15,8 @@ const productService = {
     const { data } = await httpService.post(productEndPoint, payload);
     return data;
   },
-  update: async (payload) => {
-    const { data } = await httpService.patch(
-      productEndPoint + payload._id,
-      payload
-    );
+  update: async (id, payload) => {
+    const { data } = await httpService.patch(productEndPoint + id, payload);
     return data;
   },
   delete: async (id) => {

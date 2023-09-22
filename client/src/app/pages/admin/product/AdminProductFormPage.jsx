@@ -12,22 +12,21 @@ import {
   TextInput,
   TextareaField,
 } from "../../../common/components/form";
+import ImageField from "../../../common/components/form/ImageField";
 import Loading from "../../../common/components/loading";
 import useForm from "../../../hooks/useForm";
 import { getCategories } from "../../../store/category";
 import { getCharacteristics } from "../../../store/characteristic";
 import {
-  createdProduct,
+  createProduct,
   getProductById,
   getProductsLoadingStatus,
   removedProduct,
-  updatedProduct,
+  updateProduct,
 } from "../../../store/product";
 import style from "./AdminProductForm.module.scss";
 import CategoryCreate from "./CategoryCreate";
 import CharacteristicsForm from "./CharacteristicsForm";
-import ContainerCenter from "../../../common/components/containerCenter";
-import ImageField from "../../../common/components/form/ImageField";
 
 const AdminProductFormPage = () => {
   const { id } = useParams();
@@ -35,7 +34,6 @@ const AdminProductFormPage = () => {
   const categories = useSelector(getCategories());
   const isLoading = useSelector(getProductsLoadingStatus());
   const product = useSelector(getProductById(id));
-  // const render = useRef(null);
   const navigate = useNavigate();
   const CONFIG = {
     name: { isRequired: "" },
@@ -70,12 +68,11 @@ const AdminProductFormPage = () => {
 
   function onSubmit(data) {
     if (product) {
-      dispatch(updatedProduct(data));
+      dispatch(updateProduct(data));
       navigate(`/admin/product`);
     } else {
-      // dispatch(createdProduct(data));
-      // navigate(`/admin/product`);
-      console.log(data);
+      dispatch(createProduct(data));
+      navigate(`/admin/product`);
     }
   }
 
@@ -97,11 +94,6 @@ const AdminProductFormPage = () => {
         });
     }
   }, [id]);
-
-  // useEffect(() => {
-  //   render.current++;
-  //   console.log("render", render.current);
-  // });
 
   if (isLoading) return <Loading />;
 

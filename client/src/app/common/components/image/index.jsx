@@ -1,5 +1,5 @@
 import style from "./Image.module.scss";
-import configFile from "../../../../config/index.json";
+import configFile from "../../../../config";
 import { Link } from "react-router-dom";
 
 const Image = (props) => {
