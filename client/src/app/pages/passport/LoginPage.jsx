@@ -1,20 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
-import { IoChevronBackOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import Divider from "../../../common/components/divider/Divider";
-import { Button, IconButton, TextInput } from "../../../common/components/form";
-import Loading from "../../../common/components/loading";
-import useForm from "../../../hooks/useForm";
+import Divider from "../../common/components/divider/Divider";
+import { Button, TextInput } from "../../common/components/form";
+import Loading from "../../common/components/loading";
+import useForm from "../../hooks/useForm";
 import {
   getAuthLoadingStatus,
   getUserError,
-  registeredUser,
-} from "../../../store/user";
-import style from "./Registration.module.scss";
+  loggedInUser,
+} from "../../store/user";
+import style from "./LoginPage.module.scss";
 
-const Registration = () => {
+const LoginPage = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(getAuthLoadingStatus());
   const userError = useSelector(getUserError());
@@ -42,7 +41,7 @@ const Registration = () => {
   });
 
   function onSubmit(data) {
-    dispatch(registeredUser(data));
+    dispatch(loggedInUser(data));
   }
 
   useEffect(() => {
@@ -51,20 +50,15 @@ const Registration = () => {
     }
   }, [userError]);
 
-  const toLogin = () => {
+  const toRegistration = () => {
     form.email.length > 0
-      ? navigate(`/passport/login?email=${form.email}`)
-      : navigate(`/passport/login`);
+      ? navigate(`/passport/registration?email=${form.email}`)
+      : navigate(`/passport/registration`);
   };
 
   return (
-    <form onSubmit={handlerSubmit} className={style.container}>
-      <div className={style.back}>
-        <IconButton type="button" onClick={toLogin}>
-          <IoChevronBackOutline />
-        </IconButton>
-      </div>
-      <h3 className={style.label}>Регистрация</h3>
+    <form onSubmit={handlerSubmit}>
+      <h3 className={style.label}>Вход</h3>
       <Divider row="2" />
       <TextInput
         autoComplete={name.email}
@@ -77,7 +71,7 @@ const Registration = () => {
       <Divider />
       <TextInput
         type="password"
-        autoComplete="off"
+        autoComplete={name.password}
         name={name.password}
         value={form.password}
         placeholder={placeholder.password}
@@ -85,11 +79,13 @@ const Registration = () => {
         onChange={handlerChange}
       />
       <Divider row="2" />
-      <Button disabled={!isValid}>
-        {isLoading ? <Loading /> : "Зарегистрироваться"}
+      <Button disabled={!isValid}>{isLoading ? <Loading /> : "Войти"}</Button>
+      <Divider />
+      <Button type="button" outline={true} onClick={toRegistration}>
+        Зарегистрироваться
       </Button>
     </form>
   );
 };
 
-export default Registration;
+export default LoginPage;

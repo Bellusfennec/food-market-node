@@ -67,29 +67,14 @@ const {
   userRequested,
   userRecived,
   userRequestFailed,
-  userCreated,
   userUpdated,
   authRequested,
   authRequestSuccess,
   authRequestFailed,
 } = actions;
 
-const userCreateRequested = createAction("users/userCreateRequested");
-const userCreateFailed = createAction("users/userCreateFailed");
 const userUpdateRequested = createAction("users/userUpdateRequested");
 const userUpdateFailed = createAction("users/userUpdateFailed");
-
-// function createUser(payload) {
-//   return async function (dispatch) {
-//     dispatch(userCreateRequested());
-//     try {
-//       const { content } = await userService.create(payload);
-//       dispatch(userCreated(content));
-//     } catch (error) {
-//       dispatch(userCreateFailed(error.message));
-//     }
-//   };
-// }
 
 export const registeredUser = (payload) => async (dispatch) => {
   dispatch(authRequested());
@@ -102,7 +87,6 @@ export const registeredUser = (payload) => async (dispatch) => {
     });
     localStorageService.setTokens(content);
     dispatch(authRequestSuccess({ _id: content.userId }));
-    // dispatch(createUser({ _id: content.userId, email, password, ...rest }));
   } catch (error) {
     const { code, message } = error.response.data.error;
     if (code === 400) {

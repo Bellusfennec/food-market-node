@@ -1,10 +1,7 @@
-@import "../../../common/styles/vars";
+@import "../../common/styles/vars";
 
 .container {
   position: relative;
-}
-.hint {
-  color: lightcoral;
 }
 .label {
   text-align: center;
@@ -12,5 +9,5 @@
 .back {
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
 }

@@ -6,6 +6,7 @@ const auth = require("../middleware/auth.middleware");
 const { check, validationResult } = require("express-validator");
 const { nanoid } = require("nanoid");
 const path = require("path");
+const fs = require("fs");
 
 router.get("/", async (req, res) => {
   try {
@@ -34,8 +35,16 @@ router.post("/", auth, [
           },
         });
       }
+      const ID = nanoid();
+      const image = req.files ? ID + ".jpg" : "no-pic.jpg";
+      if (req.files) {
+        const newImage = req.files.image;
+        newImage.mv(path.resolve(__dirname, "..", "static", image));
+      }
+
       const characteristicsIds = [];
-      for (let item of req.body.characteristics) {
+      const characteristicsList = JSON.parse(req.body.characteristics);
+      for (let item of characteristicsList) {
         delete item?._id;
         const newSpecification = await Characteristic.create(item);
         characteristicsIds.push(newSpecification._id);
@@ -43,6 +52,7 @@ router.post("/", auth, [
 
       const product = {
         ...req.body,
+        image: image,
         characteristics: characteristicsIds,
       };
       const newProduct = await Product.create(product);
@@ -56,30 +66,12 @@ router.post("/", auth, [
     }
   },
 ]);
-router.delete("/:productId", auth, async (req, res) => {
-  try {
-    const { productId } = req.params;
-    const product = await Product.findById(productId);
-    for (let item of product.characteristics) {
-      await Characteristic.deleteOne(item._id);
-    }
-
-    await Product.deleteOne(product._id);
-
-    res.status(201).send(null);
-  } catch (error) {
-    console.log(error);
-    res
-      .status(500)
-      .json({ message: "На сервере произошла ошибка. Попробуйте позже" });
-  }
-});
 
 router.patch("/:productId", auth, async (req, res) => {
   try {
-    const ID = nanoid();
     const { productId } = req.params;
     const findProduct = await Product.findById(productId);
+    const ID = nanoid();
     const image = req.files ? ID + ".jpg" : findProduct.image;
     if (req.files) {
       const newImage = req.files.image;
@@ -89,7 +81,7 @@ router.patch("/:productId", auth, async (req, res) => {
     const characteristicsIds = [];
     const characteristicsList = JSON.parse(req.body.characteristics);
     for (let item of characteristicsList) {
-      if (item._id < 5) {
+      if (item._id <= 1000) {
         delete item?._id;
         const newSpecification = await Characteristic.create(item);
         characteristicsIds.push(newSpecification._id);
@@ -108,10 +100,10 @@ router.patch("/:productId", auth, async (req, res) => {
       );
       if (index === -1) await Characteristic.deleteOne(item._id);
     }
-
     const product = {
       ...req.body,
       image: image,
+      priceSale: req.body.priceSale === "null" ? null : req.body.priceSale,
       characteristics: characteristicsIds,
     };
     const updProduct = await Product.findByIdAndUpdate(productId, product, {
@@ -119,6 +111,33 @@ router.patch("/:productId", auth, async (req, res) => {
     });
 
     res.status(201).send(updProduct);
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ message: "На сервере произошла ошибка. Попробуйте позже" });
+  }
+});
+
+router.delete("/:productId", auth, async (req, res) => {
+  try {
+    const { productId } = req.params;
+    const product = await Product.findById(productId);
+    for (let item of product.characteristics) {
+      await Characteristic.deleteOne(item._id);
+    }
+    if (product.image !== "no-pic.jpg") {
+      fs.unlink(
+        path.resolve(__dirname, "..", "static", product.image),
+        (err) => {
+          if (err) throw err;
+        }
+      );
+    }
+
+    await Product.deleteOne(product._id);
+
+    res.status(201).send(null);
   } catch (error) {
     console.log(error);
     res

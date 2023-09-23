@@ -4,10 +4,10 @@ import { useSelector } from "react-redux";
 import { Navigate, useParams } from "react-router-dom";
 import Loading from "../../common/components/loading";
 import { getCurrentUser, getLoggedStatus } from "../../store/user";
-import EditUser from "./components/EditUser";
-import Login from "./components/Login";
-import Profile from "./components/Profile";
-import Registration from "./components/Registration";
+import EditUserPage from "./EditUserPage";
+import LoginPage from "./LoginPage";
+import ProfilePage from "./ProfilePage";
+import RegistrationPage from "./RegistrationPage";
 import PassportLayout from "../../layouts/passport";
 import ContainerCenter from "../../common/components/containerCenter";
 import MainLayout from "../../layouts/main";
@@ -38,8 +38,8 @@ const PassportPage = () => {
     return (
       <MainLayout>
         <ContainerCenter>
-          {page === "profile" && <Profile />}
-          {page === "edit" && <EditUser />}
+          {page === "profile" && <ProfilePage />}
+          {page === "edit" && <EditUserPage />}
         </ContainerCenter>
       </MainLayout>
     );
@@ -49,8 +49,8 @@ const PassportPage = () => {
     !isLogged && (
       <PassportLayout>
         <ContainerCenter>
-          {page === "login" && <Login />}
-          {page === "registration" && <Registration />}
+          {page === "login" && <LoginPage />}
+          {page === "registration" && <RegistrationPage />}
         </ContainerCenter>
       </PassportLayout>
     )

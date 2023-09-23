@@ -3,12 +3,12 @@ import React from "react";
 import { MdLogout, MdSettings } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Divider from "../../../common/components/divider/Divider";
-import { Button, IconButton } from "../../../common/components/form";
-import { getCurrentUser } from "../../../store/user";
-import style from "./Profile.module.scss";
+import Divider from "../../common/components/divider/Divider";
+import { Button, IconButton } from "../../common/components/form";
+import { getCurrentUser } from "../../store/user";
+import style from "./ProfilePage.module.scss";
 
-const Profile = () => {
+const ProfilePage = () => {
   const user = useSelector(getCurrentUser());
   const { email } = user;
   const navigate = useNavigate();
@@ -32,4 +32,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ProfilePage;

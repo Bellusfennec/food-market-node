@@ -5,12 +5,16 @@ export const createProduct = createAsyncThunk(
   "product/createProduct",
   async (payload, { rejectWithValue }) => {
     try {
-      // const formData = new FormData();
-      // for (const key in payload) {
-      //   console.log("FD", key, formData[key]);
-      //   // formData.append()
-      // }
-      const { content } = await productService.create(payload);
+      const data = { ...payload };
+      const formData = new FormData();
+      for (const key in data) {
+        if (key === "characteristics") {
+          formData.append(`${key}`, JSON.stringify(payload[key]));
+        } else {
+          formData.append(`${key}`, payload[key]);
+        }
+      }
+      const { content } = await productService.create(formData);
       return content;
     } catch (error) {
       console.log(error);
@@ -26,14 +30,12 @@ export const updateProduct = createAsyncThunk(
       const data = { ...payload };
       const formData = new FormData();
       for (const key in data) {
-        console.log("FD", key, payload[key]);
-        if (typeof payload[key] === "object") {
+        if (key === "characteristics") {
           formData.append(`${key}`, JSON.stringify(payload[key]));
         } else {
           formData.append(`${key}`, payload[key]);
         }
       }
-      console.log(data, formData);
       const { content } = await productService.update(payload._id, formData);
       return content;
     } catch (error) {

@@ -3,19 +3,18 @@ import React from "react";
 import { IoChevronBackOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Divider from "../../../common/components/divider/Divider";
-import { Button, IconButton, TextInput } from "../../../common/components/form";
-import Loading from "../../../common/components/loading";
-import useForm from "../../../hooks/useForm";
-
-import style from "./EditUser.module.scss";
+import Divider from "../../common/components/divider/Divider";
+import { Button, IconButton, TextInput } from "../../common/components/form";
+import useForm from "../../hooks/useForm";
+import style from "./EditUserPage.module.scss";
 import {
   getCurrentUser,
   getUserLoadingStatus,
   updatedUser,
-} from "../../../store/user";
+} from "../../store/user";
+import Loading from "../../common/components/loading";
 
-const EditUser = () => {
+const EditUserPage = () => {
   const dispatch = useDispatch();
   const user = useSelector(getCurrentUser());
   const isLoading = useSelector(getUserLoadingStatus());
@@ -81,4 +80,4 @@ const EditUser = () => {
   );
 };
 
-export default EditUser;
+export default EditUserPage;

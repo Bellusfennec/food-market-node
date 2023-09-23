@@ -1,19 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
+import { IoChevronBackOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import Divider from "../../../common/components/divider/Divider";
-import { Button, TextInput } from "../../../common/components/form";
-import Loading from "../../../common/components/loading";
-import useForm from "../../../hooks/useForm";
+import Divider from "../../common/components/divider/Divider";
+import { Button, IconButton, TextInput } from "../../common/components/form";
+import Loading from "../../common/components/loading";
+import useForm from "../../hooks/useForm";
 import {
   getAuthLoadingStatus,
   getUserError,
-  loggedInUser,
-} from "../../../store/user";
-import style from "./Login.module.scss";
+  registeredUser,
+} from "../../store/user";
+import style from "./RegistrationPage.module.scss";
 
-const Login = () => {
+const RegistrationPage = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(getAuthLoadingStatus());
   const userError = useSelector(getUserError());
@@ -41,7 +42,7 @@ const Login = () => {
   });
 
   function onSubmit(data) {
-    dispatch(loggedInUser(data));
+    dispatch(registeredUser(data));
   }
 
   useEffect(() => {
@@ -50,15 +51,20 @@ const Login = () => {
     }
   }, [userError]);
 
-  const toRegistration = () => {
+  const toLogin = () => {
     form.email.length > 0
-      ? navigate(`/passport/registration?email=${form.email}`)
-      : navigate(`/passport/registration`);
+      ? navigate(`/passport/login?email=${form.email}`)
+      : navigate(`/passport/login`);
   };
 
   return (
-    <form onSubmit={handlerSubmit}>
-      <h3 className={style.label}>Вход</h3>
+    <form onSubmit={handlerSubmit} className={style.container}>
+      <div className={style.back}>
+        <IconButton type="button" onClick={toLogin}>
+          <IoChevronBackOutline />
+        </IconButton>
+      </div>
+      <h3 className={style.label}>Регистрация</h3>
       <Divider row="2" />
       <TextInput
         autoComplete={name.email}
@@ -71,7 +77,7 @@ const Login = () => {
       <Divider />
       <TextInput
         type="password"
-        autoComplete={name.password}
+        autoComplete="off"
         name={name.password}
         value={form.password}
         placeholder={placeholder.password}
@@ -79,13 +85,11 @@ const Login = () => {
         onChange={handlerChange}
       />
       <Divider row="2" />
-      <Button disabled={!isValid}>{isLoading ? <Loading /> : "Войти"}</Button>
-      <Divider />
-      <Button type="button" outline={true} onClick={toRegistration}>
-        Зарегистрироваться
+      <Button disabled={!isValid}>
+        {isLoading ? <Loading /> : "Зарегистрироваться"}
       </Button>
     </form>
   );
 };
 
-export default Login;
+export default RegistrationPage;

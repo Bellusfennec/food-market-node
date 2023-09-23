@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import List from "../../../common/components/card/List";
-import Container from "../../../common/components/container";
-import Loading from "../../../common/components/loading";
-import ProductCard from "../../../common/components/productCard";
+import List from "../../common/components/card/List";
+import Container from "../../common/components/container";
+import Loading from "../../common/components/loading";
 import {
   getCategories,
   getCategoriesLoadingStatus,
-} from "../../../store/category";
-import { getProducts, getProductsLoadingStatus } from "../../../store/product";
-import style from "./ListProducts.module.scss";
+} from "../../store/category";
+import { getProducts, getProductsLoadingStatus } from "../../store/product";
+import style from "./ProductListPage.module.scss";
+import ProductCard from "../../common/components/productCard";
 
-const ListProducts = () => {
+const ProductListPage = () => {
   const products = useSelector(getProducts());
   const isLoadingProducts = useSelector(getProductsLoadingStatus());
   const categories = useSelector(getCategories());
@@ -63,4 +63,4 @@ const ListProducts = () => {
   );
 };
 
-export default ListProducts;
+export default ProductListPage;

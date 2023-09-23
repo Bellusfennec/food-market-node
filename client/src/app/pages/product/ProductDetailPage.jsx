@@ -35,6 +35,7 @@ const ProductDetailPage = () => {
           setCharacteristics(result);
         });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productId, product]);
 
   const handlerAddToBasket = (id) => dispatch(addToBasket(id));
