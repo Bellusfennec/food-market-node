@@ -1,0 +1,12 @@
+# Создать
+docker build -t fmn .
+# Просмотр образов
+docker image ls
+# Запустить в контейнере
+docker run -d -p 80:8080 --name fmn --rm fmn
+# Остановить контейнер
+docker stop fmn
+# Удалить контейнер
+docker rm fmn
+# Удалить образ
+docker image rm fmn
